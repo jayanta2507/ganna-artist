@@ -1,2 +1,1 @@
-# ganna-artist
-Test
+# kawaya-artist
