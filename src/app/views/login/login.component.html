@@ -30,7 +30,7 @@
                   <input [type]="hideLogin ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password">
                   <i class="fa fa-lock login_icon" aria-hidden="true"></i>
                   <ng-container *ngIf="formSubmitted && f.password.errors">
-                    <span *ngIf="f.password.errors.required || f.email.password.noSpace" style="color: #ff301e;">*Please enter the password</span>
+                    <span *ngIf="f.password.errors.required || f.password.errors.noSpace" style="color: #ff301e;">*Please enter the password</span>
                   </ng-container>
                   <i (click)="hideLogin = !hideLogin" *ngIf="hideLogin" class="fa fa-eye login_icon_custom" aria-hidden="true"></i>
                   <i (click)="hideLogin = !hideLogin" *ngIf="!hideLogin" class="fa fa-eye-slash login_icon_custom" aria-hidden="true"></i>

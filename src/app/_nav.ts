@@ -23,13 +23,19 @@ export let navItems: INavData[] = [];
       //attributes: { disabled: isActive == 1 ? false : true },
     },
     {
+      name: 'Albums Category',
+      url: '/albums-category',
+      icon: 'fa fa-file-text-o',
+      //attributes: { disabled: isActive == 1 ? false : true },
+    },
+    {
       name: 'Songs',
       url: '/song',
       icon: 'fa fa-file-text-o',
       //attributes: { disabled: isActive == 1 ? false : true },
     },
-     {
-      name: 'Songs-category',
+    {
+      name: 'Songs Category',
       url: '/songs-category',
       icon: 'fa fa-file-text-o',
       //attributes: { disabled: isActive == 1 ? false : true },
@@ -39,5 +45,13 @@ export let navItems: INavData[] = [];
       url: '/podcast',
       icon: 'fa fa-podcast',
       //attributes: { disabled: isActive == 1 ? false : true },
-    }
+
+    },
+    {
+      name: 'Podcast Category',
+      url: '/podcast-category',
+      icon: 'fa fa-podcast',
+      //attributes: { disabled: isActive == 1 ? false : true },
+    },
+
   ];

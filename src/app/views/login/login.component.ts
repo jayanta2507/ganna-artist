@@ -58,6 +58,8 @@ export class LoginComponent {
       email: ['', [Validators.required, noSpace]],
       password: ['', [Validators.required, noSpace]]
     })
+
+    console.log(this.loginForm)
   }
 
   createRegForm() {
@@ -86,6 +88,7 @@ export class LoginComponent {
 
   submitLoginForm() {
     this.formSubmitted = true;
+    console.log(this.loginForm)
     if(this.loginForm.invalid) return;
 
     this.requestData.url = 'login';

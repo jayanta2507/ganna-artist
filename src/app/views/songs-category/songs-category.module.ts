@@ -30,4 +30,3 @@ import { SongDetailsComponent } from './song-details/song-details.component';
   ]
 })
 export class SongsCategoryModule { }
-

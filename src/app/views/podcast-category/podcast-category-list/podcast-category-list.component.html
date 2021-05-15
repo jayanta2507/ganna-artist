@@ -1,0 +1,85 @@
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by podcast category name">
+                    <div class="input-group-append search_button">
+                        <button  class="btn btn-danger search_button_style" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button class="btn btn-danger search_button_style" type="button">
+                        <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div style="float: right;">
+                    <button class="btn btn-danger" routerLink="add"><i _ngcontent-jlk-c84="" class="fa fa-plus fa-md"></i> Add podcast category</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" 
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()">
+            <div class="col-12">
+
+            <div class="podcast_table">
+            <table class="table table-striped podcast_table_inner">
+                <thead>
+                    <tr>
+                        <th width="30%">Sl No.</th>
+                        <th width="50%">Name</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container>
+                        <tr class="row_shadow">
+                            <td valign="middle"></td>
+                           
+                            <td valign="middle"></td>
+
+                            <td valign="middle">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                    <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(1)">
+                                    <i class="fa fa-eye fa-lg"></i>
+                                    </a>
+                                </div>
+
+                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                    <a class="btn btn-light btn-sm" title="Edit" (click)="navigateToEdit(1)">
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </div>
+
+                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                    <a class="btn btn-light btn-sm" title="Delete">
+                                    <i class="fa fa-trash fa-lg"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
+                <img src="assets/images/no_image2.png" alt="noimage" style="width: 80%; max-width: 400px;" /> 
+            </h3> -->
+        </div>
+        </div>
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
