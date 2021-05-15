@@ -9,7 +9,7 @@ export let navItems: INavData[] = [];
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'fa fa-file-text-o',
-      attributes: { disabled: isActive == 1 ? false : true }
+      //attributes: { disabled: isActive == 1 ? false : true }
     },
     {
       name: 'Upload Document',
@@ -20,18 +20,24 @@ export let navItems: INavData[] = [];
       name: 'Albums',
       url: '/album',
       icon: 'fa fa-file-text-o',
-      attributes: { disabled: isActive == 1 ? false : true },
+      //attributes: { disabled: isActive == 1 ? false : true },
     },
     {
       name: 'Songs',
       url: '/song',
       icon: 'fa fa-file-text-o',
-      attributes: { disabled: isActive == 1 ? false : true },
+      //attributes: { disabled: isActive == 1 ? false : true },
+    },
+     {
+      name: 'Songs-category',
+      url: '/songs-category',
+      icon: 'fa fa-file-text-o',
+      //attributes: { disabled: isActive == 1 ? false : true },
     },
     {
       name: 'Podcast',
       url: '/podcast',
       icon: 'fa fa-podcast',
-      attributes: { disabled: isActive == 1 ? false : true },
+      //attributes: { disabled: isActive == 1 ? false : true },
     },
   ];
