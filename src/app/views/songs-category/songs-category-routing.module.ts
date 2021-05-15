@@ -1,44 +1,53 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SongsCategoryDetailsComponent } from './songs-category-details/songs-category-details.component';
-import { SongsCategoryListComponent } from './songs-category-list/songs-category-list.component';
-import { SongsCategoryEditComponent } from './songs-category-edit/songs-category-edit.component';
-import { SongsCategoryAddComponent } from './songs-category-add/songs-category-add.component';
+
+import { SongListComponent } from './song-list/song-list.component';
+import { SongAddComponent } from './song-add/song-add.component';
+import { SongEditComponent} from './song-edit/song-edit.component';
+import { SongDetailsComponent } from './song-details/song-details.component';
+
 
 const routes: Routes = [{
     path: '',
     data: {
-      title: 'Song Category'
+
+      title: 'Song-Category'
+
     },
     children: [
       {
         path: '',
-        component: SongsCategoryListComponent,
+
+        component: SongListComponent,
         data: {
-          title: 'Song List'
+          title: 'Song-Category List'
         },
       },
-      {
-        path: 'add',
-        component: SongsCategoryAddComponent,
-        data: {
-          title: 'Song Add'
-        },
-      },
-      {
+       {
         path: 'details/:id',
-        component: SongsCategoryDetailsComponent,
+        component:  SongDetailsComponent ,
+
         data: {
           title: 'Song Details'
         },
       },
       {
         path: 'edit/:id',
-        component: SongsCategoryEditComponent,
+
+        component: SongEditComponent,
         data: {
           title: 'Song Edit'
         },
-      }
+      },
+      {
+        path: 'add',
+        component: SongAddComponent,
+        data: {
+          title: 'Song Add'
+        },
+      },
+     
+
     ]
   }];
 
@@ -47,3 +56,4 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class SongsCategoryRoutingModule { }
+
