@@ -29,15 +29,21 @@ export let navItems: INavData[] = [];
       //attributes: { disabled: isActive == 1 ? false : true },
     },
     {
+      name: 'Songs Category',
+      url: '/songs-category',
+      icon: 'fa fa-file-text-o',
+      //attributes: { disabled: isActive == 1 ? false : true },
+    },
+    {
       name: 'Podcast',
       url: '/podcast',
       icon: 'fa fa-podcast',
       //attributes: { disabled: isActive == 1 ? false : true },
     },
     {
-      name: 'Songs Category',
-      url: '/song-category',
-      icon: 'fa fa-file-text-o',
+      name: 'Podcast Category',
+      url: '/podcast-category',
+      icon: 'fa fa-podcast',
       //attributes: { disabled: isActive == 1 ? false : true },
     },
   ];

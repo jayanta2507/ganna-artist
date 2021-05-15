@@ -62,15 +62,21 @@ export const routes: Routes = [
         canActivate: [AuthGuardService]
       },
       {
+        path: 'songs-category',
+        loadChildren: () => import('./views/songs-category/songs-category.module').then(m => m.SongsCategoryModule),
+        canActivate: [AuthGuardService]
+      },
+      {
         path: 'podcast',
         loadChildren: () => import('./views/podcast/podcast.module').then(m => m.PodcastModule),
         canActivate: [AuthGuardService]
       },
       {
-        path: 'song-category',
-        loadChildren: () => import('./views/songs-category/songs-category.module').then(m => m.SongsCategoryModule),
+        path: 'podcast-category',
+        loadChildren: () => import('./views/podcast-category/podcast-category.module').then(m => m.PodcastCategoryModule),
         canActivate: [AuthGuardService]
       }
+     
     ]
   },
 ];
