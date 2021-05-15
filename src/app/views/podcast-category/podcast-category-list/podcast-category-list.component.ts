@@ -18,5 +18,7 @@ export class PodcastCategoryListComponent implements OnInit {
   navigateToDetails(podcastCatId){
   	this.router.navigate(['podcast-category/details/'+btoa(podcastCatId)])
   }
-
+  navigateToEdit(podcastCatEditId){
+  	this.router.navigate(['podcast-category/edit/'+btoa(podcastCatEditId)])
+  } 
 }

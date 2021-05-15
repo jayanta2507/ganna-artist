@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PodcastCategoryListComponent } from './podcast-category-list/podcast-category-list.component';
 import { PodcastCategoryAddComponent } from './podcast-category-add/podcast-category-add.component';
 import { PodcastCategoryDetailsComponent } from './podcast-category-details/podcast-category-details.component';
+import { PodcastCategoryEditComponent } from './podcast-category-edit/podcast-category-edit.component'
 
 const routes: Routes = [{
     path: '',
@@ -29,6 +30,13 @@ const routes: Routes = [{
         component:  PodcastCategoryDetailsComponent ,
         data: {
           title: 'Podcast Category Details'
+        },
+      },
+      {
+        path: 'edit/:id',
+        component:  PodcastCategoryEditComponent,
+        data: {
+          title: 'Podcast Category Edit'
         },
       },
       /* {
