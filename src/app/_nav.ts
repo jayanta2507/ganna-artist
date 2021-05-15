@@ -34,4 +34,10 @@ export let navItems: INavData[] = [];
       icon: 'fa fa-podcast',
       attributes: { disabled: isActive == 1 ? false : true },
     },
+     {
+      name: 'Songs Category',
+      url: '/song-category',
+      icon: 'fa fa-file-text-o',
+      attributes: { disabled: isActive == 1 ? false : true },
+    }
   ];
