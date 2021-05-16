@@ -6,12 +6,23 @@ import { PodcastCategoryAddComponent } from './podcast-category-add/podcast-cate
 import { PodcastCategoryEditComponent } from './podcast-category-edit/podcast-category-edit.component';
 import { PodcastCategoryDetailsComponent } from './podcast-category-details/podcast-category-details.component';
 
+import { NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../../shared/shared.module';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [PodcastCategoryListComponent, PodcastCategoryAddComponent, PodcastCategoryEditComponent, PodcastCategoryDetailsComponent],
   imports: [
     CommonModule,
-    PodcastCategoryRoutingModule
+    PodcastCategoryRoutingModule,
+	NgbCarouselModule,
+	NgbModule,
+	SharedModule,
+	ReactiveFormsModule,
+	FormsModule,
+	InfiniteScrollModule
   ]
 })
 export class PodcastCategoryModule { }
