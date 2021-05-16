@@ -11,11 +11,11 @@ export class AlbumsCategoryListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-navigateToDetails(podcastCatId){
-  	this.router.navigate(['podcast-category/details/'+btoa(podcastCatId)])
+ navigateToDetails(albumsCatId){
+  	this.router.navigate(['albums-category/details/'+btoa(albumsCatId)])
   }
-  navigateToEdit(podcastCatEditId){
-  	this.router.navigate(['podcast-category/edit/'+btoa(podcastCatEditId)])
+  navigateToEdit(albumsCatEditId){
+  	this.router.navigate(['albums-category/edit/'+btoa(albumsCatEditId)])
   } 
 }
  

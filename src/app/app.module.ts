@@ -121,6 +121,7 @@ const firebaseConfig = {
     OtpVerificationComponent,
     AutoTabDirective,
     AutoTabDirectivePrev,
+    
   ],
   providers: [
     IconSetService,
