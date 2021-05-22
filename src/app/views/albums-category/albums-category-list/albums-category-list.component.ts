@@ -17,7 +17,7 @@ export class AlbumsCategoryListComponent implements OnInit {
 
 
   subscriptions: Subscription[] = [];
-  albumsCategoryList:any       = [];
+  albumsCategoryList:any        = [];
   isLoading: boolean            = false;
   currentPage:any               = 1;
   searchText:any                = "";
@@ -33,7 +33,33 @@ export class AlbumsCategoryListComponent implements OnInit {
   ngOnInit(): void {
      this.getAlbumsCategoryList();
   }
-    getAlbumsCategoryList(){
+
+  searchAlbumCategory(){
+ 
+    if (this.searchText.length>3 && this.searchText!='') {
+      this.currentPage = 1;
+      this.albumsCategoryList = [];
+      this.getAlbumsCategoryList();
+    }
+
+    if (this.searchText.length==0) {
+      this.currentPage = 1;
+      this.albumsCategoryList = [];
+      this.searchText         = "";
+      this.getAlbumsCategoryList();
+    }
+
+  }
+
+  clearSearch(){
+    this.currentPage = 1;
+    this.albumsCategoryList = [];
+    this.searchText         = "";
+    this.getAlbumsCategoryList();
+  }
+  
+
+  getAlbumsCategoryList(){
      if (this.searchStatus==0) {
         this.isLoading = true;
       }
@@ -69,17 +95,20 @@ export class AlbumsCategoryListComponent implements OnInit {
           this.helperService.showError(err.error.msg);
         })
       )
-
   }
 
    
- navigateToDetails(albumsCatId){
+  navigateToDetails(albumsCatId){
   	this.router.navigate(['albums-category/details/'+btoa(albumsCatId)])
   }
+
+
   navigateToEdit(albumsCatEditId){
   	this.router.navigate(['albums-category/edit/'+btoa(albumsCatEditId)])
   }
-    openDeleteConfirmation(albumsCatId) {
+
+
+  openDeleteConfirmation(albumsCatId) {
       Swal.fire({
         title: 'Are you sure?',
         text: 'You want to delete this podcast ?',
@@ -93,6 +122,8 @@ export class AlbumsCategoryListComponent implements OnInit {
         } 
       })
   } 
+
+
   deleteAlbumsCategory(albumsCatId){
       this.isLoading = true;
       this.subscriptions.push(
@@ -114,7 +145,6 @@ export class AlbumsCategoryListComponent implements OnInit {
           this.helperService.showError(err.error.msg);
         })
       )
-    
   }
 
   } 

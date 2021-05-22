@@ -26,19 +26,29 @@ export class AlbumsCategoryAddComponent implements OnInit {
 	sortType:any      = "DESC";
 	albumURL:any      = "";
 
-  constructor(private _formBuilder: FormBuilder,
+  	constructor(private _formBuilder: FormBuilder,
 		private commonService: CommonService,
 		private helperService: HelperService,
 		private router: Router) { }
 
-  ngOnInit(): void {
-  	this.createAddForm();
-  }
-   createAddForm() {
+  	ngOnInit(): void {
+  		this.createAddForm();
+  	}
+
+
+   	createAddForm() {
 	    this.addForm = this._formBuilder.group({
 			name: ['', [Validators.required, noSpace]],
-  })
+  		})
 	}
+
+
+
+	get f(){
+		return this.addForm.controls;
+	}
+
+
 	submitCreateAlbumsCategory(){
 		this.formSubmitted = true;
 		

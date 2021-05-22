@@ -4,13 +4,15 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by albums category name">
+
+                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by albums category name" (input)="searchAlbumCategory()" [(ngModel)]="searchText">
+
                     <div class="input-group-append search_button">
                         <button  class="btn btn-danger search_button_style" type="button">
                             <i class="fa fa-search"></i>
                         </button>
                         <button class="btn btn-danger search_button_style" type="button" *ngIf="searchText!=''">
-                        <i class="fa fa-times"></i>
+                          <i class="fa fa-times" (click)="clearSearch()"></i>
                         </button>
                     </div>
                 </div>
@@ -47,7 +49,7 @@
                             <td valign="middle">{{eachAlbumCategory.name}}</td>
 
                             <td valign="middle">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                <!-- <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                     <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(1)">
                                     <i class="fa fa-eye fa-lg"></i>
                                     </a>
@@ -57,7 +59,7 @@
                                     <a class="btn btn-light btn-sm" title="Edit" (click)="navigateToEdit(1)">
                                     <i class="fa fa-edit fa-lg"></i>
                                     </a>
-                                </div>
+                                </div> -->
 
                                 <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                     <a class="btn btn-light btn-sm" title="Delete" (click)="deleteAlbumsCategory(eachAlbumCategory.id)">
