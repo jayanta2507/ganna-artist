@@ -1,1 +1,40 @@
-<p>albums-category-add works!</p>
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+        <div class="row">
+            <div class="col-md-6">
+                <span><h3>Add Albums Category</h3></span>
+            </div>
+        </div>
+        <div class="row">
+             
+            <div class="col-md-10"> 
+                <form [formGroup]="addForm" autocomplete="off" (ngSubmit)="submitCreateAlbumsCategory()">
+                    <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="podcastName">Albums Category Name</label>
+                        <input type="text" class="form-control" id="podcastName" placeholder="Enter Albums Category Name" formControlName="name" maxlength="100">
+                        <mat-error *ngIf="formSubmitted && f.name.errors">
+                            <div *ngIf="f.name.errors.required || f.name.errors.nospace">*Please enter albums category name</div>
+                        </mat-error>
+                        <p _ngcontent-bkh-c406="" class="exclamation_style"><i _ngcontent-bkh-c406="" aria-hidden="true" class="fa fa-exclamation-circle"></i> Maximum 100 character</p>
+                    </div>
+                    </div>
+  
+                    <div class="col-12">
+                    <button type="submit" class="btn btn btn-danger">Add</button>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+    
+</div>
+</div>

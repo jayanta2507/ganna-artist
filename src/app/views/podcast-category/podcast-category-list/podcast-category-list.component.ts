@@ -8,7 +8,7 @@ import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
-@Component({
+@Component({ 
   selector: 'app-podcast-category-list',
   templateUrl: './podcast-category-list.component.html',
   styleUrls: ['./podcast-category-list.component.scss']
@@ -83,9 +83,47 @@ export class PodcastCategoryListComponent implements OnInit {
   }
   navigateToEdit(podcastCatEditId){
   	this.router.navigate(['podcast-category/edit/'+btoa(podcastCatEditId)])
+  }
+
+
+  openDeleteConfirmation(podcastCatId) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to delete this podcast ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No, keep it'
+      }).then((result) => {
+        if (result.value) {
+          this.deletePodcastCategory(podcastCatId)
+        } 
+      })
   } 
 
+
   deletePodcastCategory(podcastCatId){
+      this.isLoading = true;
+
+      this.subscriptions.push(
+        this.commonService.deleteAPICall({
+          url :'delete-podcast-category/' + podcastCatId,
+        }).subscribe((result)=>{
+          this.isLoading = false;
+          if(result.status == 200) {
+            this.helperService.showSuccess(result.msg);
+            this.currentPage = 1;
+            this.podcastCategoryList = [];
+            this.getGategoryList();
+          }
+          else{
+            this.helperService.showError(result.msg);
+          }
+        },(err)=>{
+          this.isLoading = false;
+          this.helperService.showError(err.error.msg);
+        })
+      )
     
   }
 }

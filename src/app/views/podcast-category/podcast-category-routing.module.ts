@@ -17,7 +17,7 @@ const routes: Routes = [{
         data: {
           title: 'Podcast Category List'
         },
-      },
+      }, 
       {
         path: 'add',
         component: PodcastCategoryAddComponent,

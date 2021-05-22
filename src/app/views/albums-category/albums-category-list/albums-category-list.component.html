@@ -9,7 +9,7 @@
                         <button  class="btn btn-danger search_button_style" type="button">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button class="btn btn-danger search_button_style" type="button">
+                        <button class="btn btn-danger search_button_style" type="button" *ngIf="searchText!=''">
                         <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -40,11 +40,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container>
+                    <ng-container *ngFor="let eachAlbumCategory of albumsCategoryList; let i = index;"   >
                         <tr class="row_shadow">
-                            <td valign="middle"></td>
+                            <td valign="middle">{{i+1}}</td>
                            
-                            <td valign="middle"></td>
+                            <td valign="middle">{{eachAlbumCategory.name}}</td>
 
                             <td valign="middle">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <a class="btn btn-light btn-sm" title="Delete">
+                                    <a class="btn btn-light btn-sm" title="Delete" (click)="deleteAlbumsCategory(eachAlbumCategory.id)">
                                     <i class="fa fa-trash fa-lg"></i>
                                     </a>
                                 </div>
@@ -71,13 +71,13 @@
             </table>
             </div>
 
-            <!-- <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
+            <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
                 <img src="assets/images/no_image2.png" alt="noimage" style="width: 80%; max-width: 400px;" /> 
-            </h3> -->
+            </h3>
         </div>
         </div>
     </div>
-    <!-- LOADER -->
+   <!--  LOADER -->
     <div *ngIf="isLoading" class="loder">
         <img src="assets/images/loader.gif" alt="loader" />  
     </div>
