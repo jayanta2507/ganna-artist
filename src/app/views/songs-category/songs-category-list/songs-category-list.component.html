@@ -4,12 +4,13 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by song category name">
+                   <input type="text" class="form-control search_field" name="searchText" placeholder="Search by Songs category name" (input)="searchSongCategory()" [(ngModel)]="searchText">
+
                     <div class="input-group-append search_button">
                         <button  class="btn btn-danger search_button_style" type="button">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button class="btn btn-danger search_button_style" type="button" *ngIf="searchText!=''">
+                       <button class="btn btn-danger search_button_style" type="button" *ngIf="searchText!=''">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -35,16 +36,20 @@
                     <thead>
                         <tr>
                             <th width="30%">Sl No.</th>
-                            <th width="50%">Name</th>
+                             <th width="5%">Cover Image</th>
+                            <th width="20%">Name</th>
+                            <th width="10%">Details</th>
+
                             <th width="20%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container>
+                        <ng-container *ngFor="let eachSongCategory of songsCategoryList; let i = index;">
                             <tr class="row_shadow">
+                                <td valign="middle">{{i+1}}</td>
                                 <td valign="middle"></td>
-                               
-                                <td valign="middle"></td>
+                                <td valign="middle">{{eachSongCategory.name}}</td>
+                                <td valign="middle">{{eachSongCategory.details}}</td>
 
                                 <td valign="middle">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -60,7 +65,7 @@
                                     </div>
 
                                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                        <a class="btn btn-light btn-sm" title="Delete" >
+                                        <a class="btn btn-light btn-sm" title="Delete"  (click)="openDeleteConfirmation(eachSongCategory.id)">
                                         <i class="fa fa-trash fa-lg"></i>
                                         </a>
                                     </div>

@@ -8,6 +8,13 @@ import { SongsCategoryDetailsComponent } from './songs-category-details/songs-ca
 import { SongsCategoryAddComponent } from './songs-category-add/songs-category-add.component';
 
 
+import { NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../../shared/shared.module';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
+
+
 @NgModule({
   declarations: [
     SongsCategoryEditComponent,
@@ -17,7 +24,13 @@ import { SongsCategoryAddComponent } from './songs-category-add/songs-category-a
   ],
   imports: [
     CommonModule,
-    SongsCategoryRoutingModule
+    SongsCategoryRoutingModule,
+    NgbCarouselModule,
+    NgbModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+    InfiniteScrollModule
   ]
 })
 export class SongsCategoryModule { }
