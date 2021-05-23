@@ -23,6 +23,7 @@ export class SongsCategoryListComponent implements OnInit {
   searchText:any                = "";
   totalSongscategory: number    = 0;
   searchStatus:number           = 0;
+  imageURL:any                  = environment.imageURL;
  
 
 
@@ -75,13 +76,16 @@ export class SongsCategoryListComponent implements OnInit {
           this.isLoading = false;
           if(result.status == 200) {
 
-            console.log(result)
+            //console.log(result)
 
             if(this.currentPage == 1) {
               this.songsCategoryList = [];
             }
 
             for(let item of result.data.album_category_list) {
+
+              item.image_path = this.imageURL + item.cover_image;
+
               this.songsCategoryList.push(item);
             }
             

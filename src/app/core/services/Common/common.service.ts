@@ -18,6 +18,7 @@ export class CommonService {
 
   // Post API Call
   postAPICall(requestData: any) {
+
     let headers: HttpHeaders = new HttpHeaders();
     if (requestData.contentType) {
       headers = headers.append('Accept', requestData.contentType);
@@ -32,6 +33,7 @@ export class CommonService {
       .pipe(
         catchError(this.helperService.handleError('error ', []))
     );
+      
   }
 
   // Post Upload API Call

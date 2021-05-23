@@ -43,69 +43,101 @@ export class SongsCategoryAddComponent implements OnInit {
 
 	genreList = [];
 
-  constructor(private _formBuilder: FormBuilder,
+  	constructor(private _formBuilder: FormBuilder,
 		private commonService: CommonService,
 		private helperService: HelperService,
 		private router: Router) {  }
 
-  ngOnInit(): void {
-  	this.createAddForm();
+  	ngOnInit(): void {
+  		this.createAddForm();
+  	}
 
-  }
+
   	createAddForm() {
 	    this.addForm = this._formBuilder.group({
 			name: ['', [Validators.required, noSpace]],
-			//cover_picture: ['', [Validators.required, noSpace]],
-			//length: ['0'],
-			///file_name: ['', [Validators.required, noSpace]],
+			cover_picture: ['', [Validators.required, noSpace]],
 			details: ['', [Validators.required, noSpace]],
-			//is_paid: ['', [Validators.required, noSpace]],
-			//album_id: ['0'],
-			//genre_id: ['', [Validators.required, noSpace]],
 	    })
+
+	    //console.log(this.addForm)
 	}
+
+
     get f() {
 		return this.addForm.controls;
 	}
+
+
 	// Upload Song Cover Image
-  	// coverImageCategoryUpload(event) {
-	  //   if (event.target.files && event.target.files[0]) {
-	  //     const mainFile: File = event.target.files[0];
-	  //     if (event.target.files[0].type.split('/')[1] != 'png' && event.target.files[0].type.split('/')[1] != 'jpg' && event.target.files[0].type.split('/')[1] != 'jpeg') {
-	  //       this.helperService.showError('Only JPG/JPEG/PNG files allowed');
-	  //       return;
-	  //     }	   
-	  //     const reader = new FileReader();
-	  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
-	  //     reader.onload = (event) => { 
+  	coverImageCategoryUpload(event) {
+
+
+
+
+	    if (event.target.files && event.target.files[0]) {
+
+	      const mainFile: File = event.target.files[0];
+
 	      
-	  //     	this.songCoverImageObj = mainFile;
 
-	  //     	let formData: FormData = new FormData();
+	   
 
-	  //       this.isLoading = true
-	  //       formData.append('file', this.songCoverImageObj, this.songCoverImageObj.name);
-	  //       this.subscriptions.push(
-	  //         this.commonService.postAPICall({
-	  //           url: 'upload-song-category-cover-image',
-	  //           data: formData
-	  //         }).subscribe((result)=>{
-	  //           this.isLoading = false;
-	  //           if(result.status == 200) {
-	  //             this.songCoverImage     = event.target.result;
-	  //             this.songCoverImagePath = result.data.filePath;
-	  //           }
-	  //           else{
-	  //             this.helperService.showError(result.msg);
-	  //           }
-	  //         },(err)=>{
-	  //           this.isLoading = false;
-	  //           this.helperService.showError(err.error.msg);
-	  //         })
-	  //       )	      	
-	  //     };
-	  //   }
-  	// }
+	      if (event.target.files[0].type.split('/')[1] != 'png' && event.target.files[0].type.split('/')[1] != 'jpg' && 
+	      	event.target.files[0].type.split('/')[1] != 'jpeg') {
+
+	        this.helperService.showError('Only JPG/JPEG/PNG files allowed');
+	        return;
+	      }	   
+
+
+	      const reader = new FileReader();
+
+	      //console.log(reader)
+
+
+	      reader.readAsDataURL(event.target.files[0]);
+	      reader.onload = (event) => { 
+
+	      
+	      	this.songCoverImageObj = mainFile;
+
+	      	let formData: FormData = new FormData();
+
+	        this.isLoading = true
+
+	        formData.append('file', this.songCoverImageObj, this.songCoverImageObj.name);
+
+
+
+	        this.subscriptions.push(
+
+	          this.commonService.postAPICall({
+	            url: 'upload-song-category-cover-image',
+	            data: formData
+	          }).subscribe((result)=>{
+
+	            this.isLoading = false;
+	            if(result.status == 200) {
+
+	              this.songCoverImage     = event.target.result;
+	              this.songCoverImagePath = result.data.filePath;
+
+	            }
+	            else{
+	              this.helperService.showError(result.msg);
+	            }
+	          },(err)=>{
+	            this.isLoading = false;
+	            this.helperService.showError(err.error.msg);
+	          })
+
+	        )	      	
+	      };
+	    }
+
+
+  	}
 
 
 	submitSongCategory(){
@@ -115,13 +147,8 @@ export class SongsCategoryAddComponent implements OnInit {
 
 		let postData = {
 			name : this.addForm.get('name').value,
-			//cover_picture : this.songCoverImagePath,
-			//length : this.songFileLength,
-			//file_name : this.songFilePath,
+			cover_picture : this.songCoverImagePath,
 			details : this.addForm.get('details').value,
-			//is_paid : this.addForm.get('is_paid').value,
-			//album_id : this.addForm.get('album_id').value,
-			//genre_id : this.addForm.get('genre_id').value
 		}
 
 	    this.subscriptions.push(
