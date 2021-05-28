@@ -34,8 +34,11 @@
                 <table class="table table-striped podcast_table_inner">
                     <thead>
                         <tr>
-                            <th width="30%">Sl No.</th>
-                            <th width="50%">Name</th>
+                            <th width="10%">Sl No.</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Details</th>
+                            <th width="30%">Cover Picture</th>
+
                             <th width="20%">Action</th>
                         </tr>
                     </thead>
@@ -43,8 +46,15 @@
                         <ng-container *ngFor="let eachPodcastCategory of podcastCategoryList; let i = index;">
                             <tr class="row_shadow">
                                 <td valign="middle">{{i+1}}</td>
-                               
                                 <td valign="middle">{{eachPodcastCategory.name}}</td>
+                                <td valign="middle">{{eachPodcastCategory.details}}</td>
+                               
+                                <td valign="middle"><img src="">
+
+
+                                    <img class="customeImage" width="40px" height="40px" *ngIf="eachPodcastCategory?.image_path" [src]="eachPodcastCategory?.image_path" alt="">
+
+                                    <span *ngIf="!eachPodcastCategory?.image_path">NA</span></td>
 
                                 <td valign="middle">
                                     <!-- <div class="btn-group btn-group-sm" role="group" aria-label="...">

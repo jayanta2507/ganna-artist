@@ -36,9 +36,11 @@
             <table class="table table-striped podcast_table_inner">
                 <thead>
                     <tr>
-                        <th width="30%">Sl No.</th>
-                        <th width="50%">Name</th>
-                        <th width="20%">Action</th>
+                         <th width="10%">Sl No.</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Details</th>
+                            <th width="30%">Cover Picture</th>
+                            <th width="20%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +49,15 @@
                             <td valign="middle">{{i+1}}</td>
                            
                             <td valign="middle">{{eachAlbumCategory.name}}</td>
+                             <td valign="middle"><img src="">
 
+
+                                    <img class="customeImage" width="40px" height="40px" *ngIf="eachAlbumCategory?.image_path" [src]="eachAlbumCategory?.image_path" alt="">
+
+                                    <span *ngIf="!eachAlbumCategory?.image_path">NA</span>
+
+                             
+                            <td valign="middle">{{eachAlbumCategory.details}}</td>
                             <td valign="middle">
                                 <!-- <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                     <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(1)">

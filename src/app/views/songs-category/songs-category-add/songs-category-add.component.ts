@@ -23,7 +23,7 @@ export class SongsCategoryAddComponent implements OnInit {
 	isLoading: boolean = false;
 
 
-	songCoverImage: any = 'assets/images/no_image.png';
+	songCoverImage: any = 'assets/images/no_image.png'; 
 	songCoverImageObj:any;
 	songCoverImagePath: any = '';
 

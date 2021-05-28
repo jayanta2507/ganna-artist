@@ -25,6 +25,7 @@ export class PodcastCategoryListComponent implements OnInit {
   searchText:any                = "";
   totalpodcastcategory: number  = 0;
   searchStatus:number           = 0;
+  imageURL:any                 = environment.imageURL;
 
 
   constructor(
@@ -60,7 +61,9 @@ export class PodcastCategoryListComponent implements OnInit {
             }
 
             for(let item of result.data.podcast_category_list) {
-              this.podcastCategoryList.push(item);
+    
+              item.image_path = this.imageURL + item.cover_image;
+              this.podcastCategoryList.push(item); 
             }
             
             this.totalpodcastcategory = result.data.totalCount;

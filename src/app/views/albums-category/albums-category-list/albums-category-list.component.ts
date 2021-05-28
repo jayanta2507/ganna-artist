@@ -23,6 +23,7 @@ export class AlbumsCategoryListComponent implements OnInit {
   searchText:any                = "";
   totalAlbumscategory: number   = 0;
   searchStatus:number           = 0;
+    imageURL:any                 = environment.imageURL;
  
 
   constructor( private router:Router, 
@@ -80,6 +81,9 @@ export class AlbumsCategoryListComponent implements OnInit {
             }
 
             for(let item of result.data.album_category_list) {
+
+
+              item.image_path = this.imageURL + item.cover_image;
               this.albumsCategoryList.push(item);
             }
             
