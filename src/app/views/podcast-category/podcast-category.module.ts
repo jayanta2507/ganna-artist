@@ -13,16 +13,16 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
-declarations: [PodcastCategoryListComponent, PodcastCategoryAddComponent, PodcastCategoryEditComponent, PodcastCategoryDetailsComponent],
-imports: [
-CommonModule,
-PodcastCategoryRoutingModule,
-NgbCarouselModule,
-NgbModule,
-SharedModule,
-ReactiveFormsModule,
-FormsModule,
-InfiniteScrollModule
-]
+  declarations: [PodcastCategoryListComponent, PodcastCategoryAddComponent, PodcastCategoryEditComponent, PodcastCategoryDetailsComponent],
+  imports: [
+    CommonModule,
+    PodcastCategoryRoutingModule,
+	NgbCarouselModule,
+	NgbModule,
+	SharedModule,
+	ReactiveFormsModule,
+	FormsModule,
+	InfiniteScrollModule
+  ]
 })
 export class PodcastCategoryModule { }

@@ -58,6 +58,7 @@ import { OtpVerificationComponent } from './views/otp-verification/otp-verificat
 import { AutoTabDirective, AutoTabDirectivePrev } from './shared/directives/autotabdirective';
 import { NumberDirective } from './shared/directives/numbers-only.directive';
 import { SharedModule } from './shared/shared.module';
+//import { SongsCategoryComponent } from './views/views/songs-category/songs-category.component';
 
 
 
@@ -121,7 +122,7 @@ const firebaseConfig = {
     OtpVerificationComponent,
     AutoTabDirective,
     AutoTabDirectivePrev,
-    
+   
   ],
   providers: [
     IconSetService,

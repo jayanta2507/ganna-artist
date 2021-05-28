@@ -16,21 +16,22 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
-declarations: [
-SongsCategoryEditComponent,
-SongsCategoryListComponent,
-SongsCategoryDetailsComponent,
-SongsCategoryAddComponent
-],
-imports: [
-CommonModule,
-SongsCategoryRoutingModule,
-NgbCarouselModule,
-NgbModule,
-SharedModule,
-ReactiveFormsModule,
-FormsModule,
-InfiniteScrollModule
-]
+  declarations: [
+    SongsCategoryEditComponent,
+    SongsCategoryListComponent,
+    SongsCategoryDetailsComponent,
+    SongsCategoryAddComponent
+  ],
+  imports: [
+    CommonModule,
+    SongsCategoryRoutingModule,
+    NgbCarouselModule,
+    NgbModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+    InfiniteScrollModule
+  ]
 })
 export class SongsCategoryModule { }
+

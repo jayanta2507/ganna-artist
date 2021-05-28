@@ -8,125 +8,125 @@ import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
-@Component({
-selector: 'app-podcast-category-list',
-templateUrl: './podcast-category-list.component.html',
-styleUrls: ['./podcast-category-list.component.scss']
+@Component({ 
+  selector: 'app-podcast-category-list',
+  templateUrl: './podcast-category-list.component.html',
+  styleUrls: ['./podcast-category-list.component.scss']
 })
 
 
 export class PodcastCategoryListComponent implements OnInit {
 
 
-subscriptions: Subscription[] = [];
-podcastCategoryList:any = [];
-isLoading: boolean = false;
-currentPage:any = 1;
-searchText:any = "";
-totalpodcastcategory: number = 0;
-searchStatus:number = 0;
-imageURL:any = environment.imageURL;
+  subscriptions: Subscription[] = [];
+  podcastCategoryList:any       = [];
+  isLoading: boolean            = false;
+  currentPage:any               = 1;
+  searchText:any                = "";
+  totalpodcastcategory: number  = 0;
+  searchStatus:number           = 0;
+  imageURL:any                 = environment.imageURL;
 
 
-constructor(
-private router:Router,
-private _formBuilder: FormBuilder,
-private commonService: CommonService,
-private helperService: HelperService
-) { }
+  constructor(
+              private router:Router, 
+              private _formBuilder: FormBuilder,
+              private commonService: CommonService,
+              private helperService: HelperService
+  ) { }
 
-ngOnInit(): void {
-this.getGategoryList();
-}
-
-
-getGategoryList(){
-if (this.searchStatus==0) {
-this.isLoading = true;
-}
+  ngOnInit(): void {
+    this.getGategoryList();
+  }
 
 
-this.subscriptions.push(
-this.commonService.getAPICall({
-url :'podcast-category-list',
-data: {page: this.currentPage, search: this.searchText}
-}).subscribe((result)=>{
-this.isLoading = false;
-if(result.status == 200) {
+  getGategoryList(){
+     if (this.searchStatus==0) {
+        this.isLoading = true;
+      }
+      
 
-console.log(result)
+      this.subscriptions.push(
+        this.commonService.getAPICall({
+          url :'podcast-category-list',
+          data: {page: this.currentPage, search: this.searchText}
+        }).subscribe((result)=>{
+          this.isLoading = false;
+          if(result.status == 200) {
 
-if(this.currentPage == 1) {
-this.podcastCategoryList = [];
-}
+            console.log(result)
 
-for(let item of result.data.podcast_category_list) {
+            if(this.currentPage == 1) {
+              this.podcastCategoryList = [];
+            }
 
-item.image_path = this.imageURL + item.cover_image;
-this.podcastCategoryList.push(item);
-}
+            for(let item of result.data.podcast_category_list) {
+    
+              item.image_path = this.imageURL + item.cover_image;
+              this.podcastCategoryList.push(item); 
+            }
+            
+            this.totalpodcastcategory = result.data.totalCount;
 
-this.totalpodcastcategory = result.data.totalCount;
+            this.searchStatus = 0;
+          }
+          else{
+            this.helperService.showError(result.msg);
+          }
+        },(err)=>{
+          this.isLoading = false;
+          this.helperService.showError(err.error.msg);
+        })
+      )
 
-this.searchStatus = 0;
-}
-else{
-this.helperService.showError(result.msg);
-}
-},(err)=>{
-this.isLoading = false;
-this.helperService.showError(err.error.msg);
-})
-)
+  }
 
-}
-
-navigateToDetails(podcastCatId){
-this.router.navigate(['podcast-category/details/'+btoa(podcastCatId)])
-}
-navigateToEdit(podcastCatEditId){
-this.router.navigate(['podcast-category/edit/'+btoa(podcastCatEditId)])
-}
-
-
-openDeleteConfirmation(podcastCatId) {
-Swal.fire({
-title: 'Are you sure?',
-text: 'You want to delete this podcast ?',
-icon: 'warning',
-showCancelButton: true,
-confirmButtonText: 'Yes',
-cancelButtonText: 'No, keep it'
-}).then((result) => {
-if (result.value) {
-this.deletePodcastCategory(podcastCatId)
-}
-})
-}
+  navigateToDetails(podcastCatId){
+    this.router.navigate(['podcast-category/details/'+btoa(podcastCatId)])
+  }
+  navigateToEdit(podcastCatEditId){
+    this.router.navigate(['podcast-category/edit/'+btoa(podcastCatEditId)])
+  }
 
 
-deletePodcastCategory(podcastCatId){
-this.isLoading = true;
+  openDeleteConfirmation(podcastCatId) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to delete this podcast ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No, keep it'
+      }).then((result) => {
+        if (result.value) {
+          this.deletePodcastCategory(podcastCatId)
+        } 
+      })
+  } 
 
-this.subscriptions.push(
-this.commonService.deleteAPICall({
-url :'delete-podcast-category/' + podcastCatId,
-}).subscribe((result)=>{
-this.isLoading = false;
-if(result.status == 200) {
-this.helperService.showSuccess(result.msg);
-this.currentPage = 1;
-this.podcastCategoryList = [];
-this.getGategoryList();
-}
-else{
-this.helperService.showError(result.msg);
-}
-},(err)=>{
-this.isLoading = false;
-this.helperService.showError(err.error.msg);
-})
-)
 
-}
+  deletePodcastCategory(podcastCatId){
+      this.isLoading = true;
+
+      this.subscriptions.push(
+        this.commonService.deleteAPICall({
+          url :'delete-podcast-category/' + podcastCatId,
+        }).subscribe((result)=>{
+          this.isLoading = false;
+          if(result.status == 200) {
+            this.helperService.showSuccess(result.msg);
+            this.currentPage = 1;
+            this.podcastCategoryList = [];
+            this.getGategoryList();
+          }
+          else{
+            this.helperService.showError(result.msg);
+          }
+        },(err)=>{
+          this.isLoading = false;
+          this.helperService.showError(err.error.msg);
+        })
+      )
+    
+  }
 }

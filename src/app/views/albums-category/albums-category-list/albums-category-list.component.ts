@@ -155,5 +155,3 @@ export class AlbumsCategoryListComponent implements OnInit {
 
 
   
-
-  
