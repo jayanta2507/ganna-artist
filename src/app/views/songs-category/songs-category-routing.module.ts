@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SongListComponent } from './song-list/song-list.component';
-import { SongAddComponent } from './song-add/song-add.component';
-import { SongEditComponent} from './song-edit/song-edit.component';
-import { SongDetailsComponent } from './song-details/song-details.component';
+import { SongsCategoryListComponent } from './songs-category-list/songs-category-list.component';
+import { SongsCategoryAddComponent } from './songs-category-add/songs-category-add.component';
+import { SongsCategoryEditComponent} from './songs-category-edit/songs-category-edit.component';
+import { SongsCategoryDetailsComponent } from './songs-category-details/songs-category-details.component';
 
 
 const routes: Routes = [{
@@ -18,14 +18,14 @@ const routes: Routes = [{
       {
         path: '',
 
-        component: SongListComponent,
+        component: SongsCategoryListComponent,
         data: {
           title: 'Song-Category List'
         },
       },
        {
         path: 'details/:id',
-        component:  SongDetailsComponent ,
+        component:  SongsCategoryDetailsComponent ,
 
         data: {
           title: 'Song Details'
@@ -34,14 +34,14 @@ const routes: Routes = [{
       {
         path: 'edit/:id',
 
-        component: SongEditComponent,
+        component: SongsCategoryEditComponent,
         data: {
           title: 'Song Edit'
         },
       },
       {
         path: 'add',
-        component: SongAddComponent,
+        component: SongsCategoryAddComponent,
         data: {
           title: 'Song Add'
         },

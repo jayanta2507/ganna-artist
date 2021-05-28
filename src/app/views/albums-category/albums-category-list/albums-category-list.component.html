@@ -4,13 +4,15 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by albums category name">
+
+                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by albums category name" (input)="searchAlbumCategory()" [(ngModel)]="searchText">
+
                     <div class="input-group-append search_button">
                         <button  class="btn btn-danger search_button_style" type="button">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button class="btn btn-danger search_button_style" type="button">
-                        <i class="fa fa-times"></i>
+                        <button class="btn btn-danger search_button_style" type="button" *ngIf="searchText!=''">
+                          <i class="fa fa-times" (click)="clearSearch()"></i>
                         </button>
                     </div>
                 </div>
@@ -34,20 +36,30 @@
             <table class="table table-striped podcast_table_inner">
                 <thead>
                     <tr>
-                        <th width="30%">Sl No.</th>
-                        <th width="50%">Name</th>
-                        <th width="20%">Action</th>
+                         <th width="10%">Sl No.</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Details</th>
+                            <th width="30%">Cover Picture</th>
+                            <th width="20%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container>
+                    <ng-container *ngFor="let eachAlbumCategory of albumsCategoryList; let i = index;"   >
                         <tr class="row_shadow">
-                            <td valign="middle"></td>
+                            <td valign="middle">{{i+1}}</td>
                            
-                            <td valign="middle"></td>
+                            <td valign="middle">{{eachAlbumCategory.name}}</td>
+                             <td valign="middle"><img src="">
 
+
+                                    <img class="customeImage" width="40px" height="40px" *ngIf="eachAlbumCategory?.image_path" [src]="eachAlbumCategory?.image_path" alt="">
+
+                                    <span *ngIf="!eachAlbumCategory?.image_path">NA</span>
+
+                             
+                            <td valign="middle">{{eachAlbumCategory.details}}</td>
                             <td valign="middle">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                <!-- <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                     <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(1)">
                                     <i class="fa fa-eye fa-lg"></i>
                                     </a>
@@ -57,10 +69,10 @@
                                     <a class="btn btn-light btn-sm" title="Edit" (click)="navigateToEdit(1)">
                                     <i class="fa fa-edit fa-lg"></i>
                                     </a>
-                                </div>
+                                </div> -->
 
                                 <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <a class="btn btn-light btn-sm" title="Delete">
+                                    <a class="btn btn-light btn-sm" title="Delete" (click)="deleteAlbumsCategory(eachAlbumCategory.id)">
                                     <i class="fa fa-trash fa-lg"></i>
                                     </a>
                                 </div>
@@ -71,13 +83,13 @@
             </table>
             </div>
 
-            <!-- <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
+            <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
                 <img src="assets/images/no_image2.png" alt="noimage" style="width: 80%; max-width: 400px;" /> 
-            </h3> -->
+            </h3>
         </div>
         </div>
     </div>
-    <!-- LOADER -->
+   <!--  LOADER -->
     <div *ngIf="isLoading" class="loder">
         <img src="assets/images/loader.gif" alt="loader" />  
     </div>

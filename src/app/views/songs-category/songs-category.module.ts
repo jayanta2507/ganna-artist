@@ -1,32 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SongsCategoryRoutingModule } from './songs-category-routing.module';
+import { SongsCategoryEditComponent } from './songs-category-edit/songs-category-edit.component';
+import { SongsCategoryListComponent } from './songs-category-list/songs-category-list.component';
+import { SongsCategoryDetailsComponent } from './songs-category-details/songs-category-details.component';
+import { SongsCategoryAddComponent } from './songs-category-add/songs-category-add.component';
+
+
+import { NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { SongsCategoryRoutingModule } from './songs-category-routing.module';
-import { SongListComponent } from './song-list/song-list.component';
-import { SharedModule } from '../../shared/shared.module';
-import { SongAddComponent } from './song-add/song-add.component';
-import { SongEditComponent } from './song-edit/song-edit.component';
-import { SongDetailsComponent } from './song-details/song-details.component';
+
+
 
 @NgModule({
-  declarations: [
-    SongListComponent,
-    SongAddComponent,
-    SongEditComponent,
-    SongDetailsComponent
-     
-  ],
-  imports: [
-    CommonModule,
-    SongsCategoryRoutingModule,
-    NgbCarouselModule,
-    ReactiveFormsModule,
-    FormsModule,
-    SharedModule,
-    InfiniteScrollModule
-  ]
+declarations: [
+SongsCategoryEditComponent,
+SongsCategoryListComponent,
+SongsCategoryDetailsComponent,
+SongsCategoryAddComponent
+],
+imports: [
+CommonModule,
+SongsCategoryRoutingModule,
+NgbCarouselModule,
+NgbModule,
+SharedModule,
+ReactiveFormsModule,
+FormsModule,
+InfiniteScrollModule
+]
 })
 export class SongsCategoryModule { }
