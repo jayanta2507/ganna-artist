@@ -104,7 +104,7 @@ export class SongsCategoryListComponent implements OnInit {
   }
 
   navigateToDetails(songCatId){
-  		this.router.navigate(['songs-category/details/'+btoa(songCatId)])
+      this.router.navigate(['songs-category/details/'+btoa(songCatId)])
 
   }
   navigateToEdit(songCatEditId){

@@ -103,12 +103,12 @@ export class AlbumsCategoryListComponent implements OnInit {
 
    
   navigateToDetails(albumsCatId){
-  	this.router.navigate(['albums-category/details/'+btoa(albumsCatId)])
+    this.router.navigate(['albums-category/details/'+btoa(albumsCatId)])
   }
 
 
   navigateToEdit(albumsCatEditId){
-  	this.router.navigate(['albums-category/edit/'+btoa(albumsCatEditId)])
+    this.router.navigate(['albums-category/edit/'+btoa(albumsCatEditId)])
   }
 
 

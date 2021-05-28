@@ -38,7 +38,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="songName">Song Category Name</label>
+                                <label for="songName">Podcast Category Name</label>
                                 <input type="text" class="form-control" id="songName" placeholder="Enter Album Name..." formControlName="name" maxlength="100">
                                 <mat-error *ngIf="formSubmitted && f.name.errors">
                                     <div *ngIf="f.name.errors.required || f.name.errors.nospace">*Please enter Podcast name</div>
