@@ -41,8 +41,6 @@ export class SongsCategoryAddComponent implements OnInit {
 	songURL:any       = "";
 
 
-	genreList = [];
-
   	constructor(private _formBuilder: FormBuilder,
 		private commonService: CommonService,
 		private helperService: HelperService,
@@ -59,8 +57,6 @@ export class SongsCategoryAddComponent implements OnInit {
 			cover_picture: ['', [Validators.required, noSpace]],
 			details: ['', [Validators.required, noSpace]],
 	    })
-
-	    //console.log(this.addForm)
 	}
 
 
