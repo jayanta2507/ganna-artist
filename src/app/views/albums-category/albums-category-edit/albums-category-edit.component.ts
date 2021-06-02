@@ -63,7 +63,7 @@ export class AlbumsCategoryEditComponent implements OnInit {
 	createAddForm() {
 	    this.addForm = this._formBuilder.group({
 			name: ['', [Validators.required, noSpace]],
-			cover_picture: ['', [Validators.required, noSpace]],
+			cover_picture: [''],
 			details: ['', [Validators.required, noSpace]],
 	    })
 	}
@@ -148,6 +148,8 @@ export class AlbumsCategoryEditComponent implements OnInit {
 				}else{
 					this.imgURL = "";
 				}
+				this.albumCoverImagePath = result.data.cover_image;
+
 
 	        	this.addForm.patchValue({
             	   	name    : this.albumCatDetails.name,
@@ -157,6 +159,36 @@ export class AlbumsCategoryEditComponent implements OnInit {
 	        	console.log(this.albumCatDetails.name)
 	          //this.helperService.showSuccess(result.msg);
 	          //this.router.navigate(['/songs-category'])
+	        }
+	        else{
+	          this.helperService.showError(result.msg);
+	        }
+	      },(err)=>{
+	        this.isLoading = false;
+	        this.helperService.showError(err.error.msg);
+	      })
+	    )
+  	}
+  	submitAlbumCategory(){
+  		this.formSubmitted = true;
+		//console.log(this.addForm);
+	    if(this.addForm.invalid) return;
+
+		let postData = {
+			name : this.addForm.get('name').value,
+			cover_picture : this.albumCoverImagePath,
+			details : this.addForm.get('details').value,
+		}
+
+	    this.subscriptions.push(
+	      this.commonService.putAPICall({
+	        url: 'update-album-category/'+this.albumCatId,
+	        data: postData
+	      }).subscribe((result)=>{
+	        this.isLoading = false;
+	        if(result.status == 200) {
+	          this.helperService.showSuccess(result.msg);
+	          this.router.navigate(['/albums-category'])
 	        }
 	        else{
 	          this.helperService.showError(result.msg);

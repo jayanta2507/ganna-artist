@@ -126,7 +126,7 @@ export class AlbumsCategoryListComponent implements OnInit {
         } 
       })
   } 
-
+ 
 
   deleteAlbumsCategory(albumsCatId){
       this.isLoading = true;
