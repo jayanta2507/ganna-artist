@@ -8,39 +8,59 @@ import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
-@Component({ 
+@Component({
   selector: 'app-podcast-category-list',
   templateUrl: './podcast-category-list.component.html',
   styleUrls: ['./podcast-category-list.component.scss']
 })
-
-
 export class PodcastCategoryListComponent implements OnInit {
 
 
   subscriptions: Subscription[] = [];
-  podcastCategoryList:any       = [];
+  podcastCategoryList:any        = [];
   isLoading: boolean            = false;
   currentPage:any               = 1;
   searchText:any                = "";
-  totalpodcastcategory: number  = 0;
+  totalPodcastcategory: number   = 0;
   searchStatus:number           = 0;
-  imageURL:any                 = environment.imageURL;
+    imageURL:any                 = environment.imageURL;
+ 
 
-
-  constructor(
-              private router:Router, 
+  constructor( private router:Router, 
               private _formBuilder: FormBuilder,
               private commonService: CommonService,
-              private helperService: HelperService
-  ) { }
+              private helperService: HelperService) { }
 
   ngOnInit(): void {
-    this.getGategoryList();
+     this.getPodcastCategoryList();
   }
 
+  searchPodcastCategory(){
+ 
+    if (this.searchText.length>3 && this.searchText!='') {
+      this.currentPage = 1;
+      this.podcastCategoryList = [];
+      this.getPodcastCategoryList();
+    }
 
-  getGategoryList(){
+    if (this.searchText.length==0) {
+      this.currentPage = 1;
+      this.podcastCategoryList = [];
+      this.searchText         = "";
+      this.getPodcastCategoryList();
+    }
+
+  }
+
+  clearSearch(){
+    this.currentPage = 1;
+    this.podcastCategoryList = [];
+    this.searchText         = "";
+    this.getPodcastCategoryList();
+  }
+  
+
+  getPodcastCategoryList(){
      if (this.searchStatus==0) {
         this.isLoading = true;
       }
@@ -61,12 +81,13 @@ export class PodcastCategoryListComponent implements OnInit {
             }
 
             for(let item of result.data.podcast_category_list) {
-    
+
+
               item.image_path = this.imageURL + item.cover_image;
-              this.podcastCategoryList.push(item); 
+              this.podcastCategoryList.push(item);
             }
             
-            this.totalpodcastcategory = result.data.totalCount;
+            this.totalPodcastcategory = result.data.totalCount;
 
             this.searchStatus = 0;
           }
@@ -78,12 +99,14 @@ export class PodcastCategoryListComponent implements OnInit {
           this.helperService.showError(err.error.msg);
         })
       )
-
   }
 
+   
   navigateToDetails(podcastCatId){
     this.router.navigate(['podcast-category/details/'+btoa(podcastCatId)])
   }
+
+
   navigateToEdit(podcastCatEditId){
     this.router.navigate(['podcast-category/edit/'+btoa(podcastCatEditId)])
   }
@@ -103,11 +126,10 @@ export class PodcastCategoryListComponent implements OnInit {
         } 
       })
   } 
-
+ 
 
   deletePodcastCategory(podcastCatId){
       this.isLoading = true;
-
       this.subscriptions.push(
         this.commonService.deleteAPICall({
           url :'delete-podcast-category/' + podcastCatId,
@@ -117,7 +139,7 @@ export class PodcastCategoryListComponent implements OnInit {
             this.helperService.showSuccess(result.msg);
             this.currentPage = 1;
             this.podcastCategoryList = [];
-            this.getGategoryList();
+            this.getPodcastCategoryList();
           }
           else{
             this.helperService.showError(result.msg);
@@ -127,6 +149,9 @@ export class PodcastCategoryListComponent implements OnInit {
           this.helperService.showError(err.error.msg);
         })
       )
-    
   }
-}
+
+  } 
+
+
+  

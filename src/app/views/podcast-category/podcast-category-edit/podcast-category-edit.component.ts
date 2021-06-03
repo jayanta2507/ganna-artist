@@ -25,7 +25,7 @@ export class PodcastCategoryEditComponent implements OnInit {
 	podcastCoverImagePath: any = '';
 
 	podcastFile: any 	  = 'assets/images/no_image.png';
-	podcastFileObj:any;
+	podcastFileObj:any ;
 	podcastFilePath: any = '';
 	podcastFileLength:any= 0
 	progress: number  = 0;
@@ -63,7 +63,7 @@ export class PodcastCategoryEditComponent implements OnInit {
 	createAddForm() {
 	    this.addForm = this._formBuilder.group({
 			name: ['', [Validators.required, noSpace]],
-			cover_picture: ['', [Validators.required, noSpace]],
+			cover_picture: [''],
 			details: ['', [Validators.required, noSpace]],
 	    })
 	}
@@ -148,6 +148,8 @@ export class PodcastCategoryEditComponent implements OnInit {
 				}else{
 					this.imgURL = "";
 				}
+				this.podcastCoverImagePath = result.data.cover_image;
+
 
 	        	this.addForm.patchValue({
             	   	name    : this.podcastCatDetails.name,
@@ -157,6 +159,36 @@ export class PodcastCategoryEditComponent implements OnInit {
 	        	console.log(this.podcastCatDetails.name)
 	          //this.helperService.showSuccess(result.msg);
 	          //this.router.navigate(['/songs-category'])
+	        }
+	        else{
+	          this.helperService.showError(result.msg);
+	        }
+	      },(err)=>{
+	        this.isLoading = false;
+	        this.helperService.showError(err.error.msg);
+	      })
+	    )
+  	}
+  	submitPodcastCategory(){
+  		this.formSubmitted = true;
+		//console.log(this.addForm);
+	    if(this.addForm.invalid) return;
+
+		let postData = {
+			name : this.addForm.get('name').value,
+			cover_picture : this.podcastCoverImagePath,
+			details : this.addForm.get('details').value,
+		}
+
+	    this.subscriptions.push(
+	      this.commonService.putAPICall({
+	        url: 'update-podcast-category/'+this.podcastCatId,
+	        data: postData
+	      }).subscribe((result)=>{
+	        this.isLoading = false;
+	        if(result.status == 200) {
+	          this.helperService.showSuccess(result.msg);
+	          this.router.navigate(['/podcast-category'])
 	        }
 	        else{
 	          this.helperService.showError(result.msg);
