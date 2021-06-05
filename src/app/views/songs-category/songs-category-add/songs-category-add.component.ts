@@ -68,16 +68,9 @@ export class SongsCategoryAddComponent implements OnInit {
 	// Upload Song Cover Image
   	coverImageCategoryUpload(event) {
 
-
-
-
 	    if (event.target.files && event.target.files[0]) {
 
 	      const mainFile: File = event.target.files[0];
-
-	      
-
-	   
 
 	      if (event.target.files[0].type.split('/')[1] != 'png' && event.target.files[0].type.split('/')[1] != 'jpg' && 
 	      	event.target.files[0].type.split('/')[1] != 'jpeg') {
@@ -86,11 +79,7 @@ export class SongsCategoryAddComponent implements OnInit {
 	        return;
 	      }	   
 
-
 	      const reader = new FileReader();
-
-	      //console.log(reader)
-
 
 	      reader.readAsDataURL(event.target.files[0]);
 	      reader.onload = (event) => { 
@@ -103,8 +92,6 @@ export class SongsCategoryAddComponent implements OnInit {
 	        this.isLoading = true
 
 	        formData.append('file', this.songCoverImageObj, this.songCoverImageObj.name);
-
-
 
 	        this.subscriptions.push(
 

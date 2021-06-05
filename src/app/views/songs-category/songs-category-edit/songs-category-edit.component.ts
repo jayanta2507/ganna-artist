@@ -63,7 +63,7 @@ export class SongsCategoryEditComponent implements OnInit {
 	createAddForm() {
 	    this.addForm = this._formBuilder.group({
 			name: ['', [Validators.required, noSpace]],
-			cover_picture: ['', [Validators.required, noSpace]],
+			cover_picture: [''],
 			details: ['', [Validators.required, noSpace]],
 	    })
 	}
@@ -149,14 +149,43 @@ export class SongsCategoryEditComponent implements OnInit {
 					this.imgURL = "";
 				}
 
+				this.songCoverImagePath = result.data.cover_image;
+
 	        	this.addForm.patchValue({
             	   	name    : this.songCatDetails.name,
             	   	details : this.songCatDetails.details,
             	});
+	        }
+	        else{
+	          this.helperService.showError(result.msg);
+	        }
+	      },(err)=>{
+	        this.isLoading = false;
+	        this.helperService.showError(err.error.msg);
+	      })
+	    )
+  	}
 
-	        	console.log(this.songCatDetails.name)
-	          //this.helperService.showSuccess(result.msg);
-	          //this.router.navigate(['/songs-category'])
+  	submitSongCategory(){
+  		this.formSubmitted = true;
+		//console.log(this.addForm);
+	    if(this.addForm.invalid) return;
+
+		let postData = {
+			name : this.addForm.get('name').value,
+			cover_picture : this.songCoverImagePath,
+			details : this.addForm.get('details').value,
+		}
+
+	    this.subscriptions.push(
+	      this.commonService.putAPICall({
+	        url: 'update-song-category/'+this.songCatId,
+	        data: postData
+	      }).subscribe((result)=>{
+	        this.isLoading = false;
+	        if(result.status == 200) {
+	          this.helperService.showSuccess(result.msg);
+	          this.router.navigate(['/songs-category'])
 	        }
 	        else{
 	          this.helperService.showError(result.msg);
