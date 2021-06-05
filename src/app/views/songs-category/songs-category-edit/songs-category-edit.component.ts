@@ -151,14 +151,12 @@ export class SongsCategoryEditComponent implements OnInit {
 				}
 				this.songCoverImagePath = result.data.cover_image;
 
+				this.songCoverImagePath = result.data.cover_image;
+
 	        	this.addForm.patchValue({
             	   	name    : this.songCatDetails.name,
             	   	details : this.songCatDetails.details,
             	});
-
-	        	console.log(this.songCatDetails.name)
-	          //this.helperService.showSuccess(result.msg);
-	          //this.router.navigate(['/songs-category'])
 	        }
 	        else{
 	          this.helperService.showError(result.msg);
@@ -169,6 +167,7 @@ export class SongsCategoryEditComponent implements OnInit {
 	      })
 	    )
   	}
+
   	submitSongCategory(){
   		this.formSubmitted = true;
 		//console.log(this.addForm);
@@ -199,5 +198,6 @@ export class SongsCategoryEditComponent implements OnInit {
 	      })
 	    )
   	}
+  	
 
 }

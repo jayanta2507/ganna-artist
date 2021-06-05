@@ -6,7 +6,8 @@ import { CommonService } from '../../../core/services/Common/common.service';
 import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute , Router } from '@angular/router';;
-import { noSpace } from '../../../shared/custom-validators/nospacesvalidator'; 
+import { noSpace } from '../../../shared/custom-validators/nospacesvalidator';
+
 
 @Component({
   selector: 'app-songs-category-details',
@@ -55,14 +56,12 @@ export class SongsCategoryDetailsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		
 		this.getSongCategory();
 	}
 
 
-	// Upload Song Cover Image
-  
   	getSongCategory(){
+
 
 	    this.subscriptions.push(
 	      this.commonService.getAPICall({
@@ -72,7 +71,6 @@ export class SongsCategoryDetailsComponent implements OnInit {
 	        if(result.status == 200) {
 
 	        	this.songCatDetails = result.data;
-
 
 	        	if (this.songCatDetails.cover_image) {
 
@@ -90,9 +88,7 @@ export class SongsCategoryDetailsComponent implements OnInit {
             	   	details : this.songCatDetails.details,
             	});
 
-	        	console.log(this.songCatDetails.name)
-	          //this.helperService.showSuccess(result.msg);
-	          //this.router.navigate(['/songs-category'])
+
 	        }
 	        else{
 	          this.helperService.showError(result.msg);
@@ -103,6 +99,5 @@ export class SongsCategoryDetailsComponent implements OnInit {
 	      })
 	    )
   	}
-  
 
 }
