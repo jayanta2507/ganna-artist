@@ -41,23 +41,23 @@ const routes: Routes = [{
       },
       /* {
         path: 'details/:id',
-        component:  SongDetailsComponent ,
+        component:  PodcastDetailsComponent ,
         data: {
-          title: 'Song Details'
+          title: 'Podcast Details'
         },
       },
       {
         path: 'edit/:id',
-        component: SongEditComponent,
+        component: PodcastEditComponent,
         data: {
-          title: 'Song Edit'
+          title: 'Podcast Edit'
         },
       },
       {
         path: 'add',
-        component: SongAddComponent,
+        component: PodcastAddComponent,
         data: {
-          title: 'Song Add'
+          title: 'Podcast Add'
         },
       },*/
      

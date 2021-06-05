@@ -38,7 +38,8 @@
                         <th width="10%">Name</th>
                         <th width="15%">Song</th>
                         <th width="10%">Album</th>
-                        <th width="20%">Details</th>
+                        <th width="10%">Category</th>
+                        <th width="10%">Details</th>
                         <th width="10%">Genre</th>
                         <th width="10%">Payment</th>
                         <th width="15%">Action</th>
@@ -60,6 +61,10 @@
 							</td>
                             <td valign="middle" *ngIf="song?.album_details!=''">{{ song?.album_details?.name }}</td>
                             <td valign="middle" *ngIf="song?.album_details==''">--</td>
+
+
+                            <td valign="middle" *ngIf="song?.song_category_details!=''">{{ song?.song_category_details?.name }}</td>
+                            <td valign="middle" *ngIf="song?.song_category_details==''">--</td>
 
 
                             <td valign="middle"  *ngIf="song?.details!=''">{{ song?.details }}</td>

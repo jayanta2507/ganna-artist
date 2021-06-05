@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute , Router } from '@angular/router';;
 import { noSpace } from '../../../shared/custom-validators/nospacesvalidator';
 
+
 @Component({
   selector: 'app-songs-category-details',
   templateUrl: './songs-category-details.component.html',
@@ -16,29 +17,51 @@ import { noSpace } from '../../../shared/custom-validators/nospacesvalidator';
 export class SongsCategoryDetailsComponent implements OnInit {
 	subscriptions: Subscription[] = [];
 	isLoading: boolean = false;
+    addForm: FormGroup;
+	formSubmitted: boolean = false;
+
+	songCoverImage: any = 'assets/images/no_image.png'; 
+	songCoverImageObj:any;
+	songCoverImagePath: any = '';
+
+	songFile: any 	  = 'assets/images/no_image.png';
+	songFileObj:any;
+	songFilePath: any = '';
+	songFileLength:any= 0
+	progress: number  = 0;
+
 	songCatDetails:any  = [];
+	currentPage:any   = 1;
+	searchText:any    = "";
+	sortKey:any       = 2;
+	sortType:any      = "DESC";
+	songURL:any       = "";
+
 	songCatId:any     = "";
+
 	imgURL:string     = environment.imageURL;
+	imageStatus:number = 0;
+
 
 	constructor(private _formBuilder: FormBuilder,
 		private commonService: CommonService,
 		private helperService: HelperService,
 		private router: Router,
-		private activatedRoute: ActivatedRoute) 
-	{ 
+		private activatedRoute: ActivatedRoute) { 
 
 		this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
 	      this.songCatId = atob(params['id']);
+	      console.log(this.songCatId)
 	    }));
 	}
-
 
 	ngOnInit(): void {
 		this.getSongCategory();
 	}
 
 
-	getSongCategory(){
+  	getSongCategory(){
+
 
 	    this.subscriptions.push(
 	      this.commonService.getAPICall({
@@ -50,11 +73,22 @@ export class SongsCategoryDetailsComponent implements OnInit {
 	        	this.songCatDetails = result.data;
 
 	        	if (this.songCatDetails.cover_image) {
+
+					this.imageStatus = 1;
 					this.imgURL = this.imgURL + this.songCatDetails.cover_image;
+
 				}else{
 					this.imgURL = "";
+
 				}
-	    
+				this.songCoverImagePath = result.data.cover_image;
+
+	        	this.addForm.patchValue({
+            	   	name    : this.songCatDetails.name,
+            	   	details : this.songCatDetails.details,
+            	});
+
+
 	        }
 	        else{
 	          this.helperService.showError(result.msg);

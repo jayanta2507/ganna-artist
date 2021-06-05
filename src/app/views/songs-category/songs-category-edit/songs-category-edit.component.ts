@@ -6,7 +6,7 @@ import { CommonService } from '../../../core/services/Common/common.service';
 import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute , Router } from '@angular/router';;
-import { noSpace } from '../../../shared/custom-validators/nospacesvalidator';
+import { noSpace } from '../../../shared/custom-validators/nospacesvalidator'; 
 
 @Component({
   selector: 'app-songs-category-edit',
@@ -147,7 +147,9 @@ export class SongsCategoryEditComponent implements OnInit {
 
 				}else{
 					this.imgURL = "";
+
 				}
+				this.songCoverImagePath = result.data.cover_image;
 
 				this.songCoverImagePath = result.data.cover_image;
 
@@ -196,5 +198,6 @@ export class SongsCategoryEditComponent implements OnInit {
 	      })
 	    )
   	}
+  	
 
 }

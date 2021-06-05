@@ -1,1 +1,56 @@
-<p>podcast-category-details works!</p>
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+    	<div class="row">
+            <div class="col-md-6">
+                <span><h3>Podcast Category Details</h3></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <img class="customeImage" width="90px" height="90px" *ngIf="imgURL" [src]="imgURL" alt="">
+                    <span *ngIf="imgURL==''">NA</span>
+                </div>
+            </div>
+        </div>
+
+     <!--    <div class="row mt-4" *ngIf="albumCatDetails?.length>0">
+
+            <div class="col-md-6">
+                <audio controls>
+				  	<source src="{{albumCatDetails.song_url}}" type="audio/mpeg">
+				</audio>
+            
+            </div>
+        </div> -->
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                   <strong>Name:</strong> {{podcastCatDetails?.name}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Details:</strong> {{podcastCatDetails?.details}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        
+        <br>
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>

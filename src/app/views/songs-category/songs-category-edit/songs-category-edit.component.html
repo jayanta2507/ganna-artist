@@ -3,7 +3,7 @@
     <div class="country_list_main_area">
         <div class="row">
             <div class="col-md-6">
-                <span><h3>Edit Song</h3></span>
+                <span><h3>Edit Song Category</h3></span>
             </div>
         </div>
         <div class="row">
@@ -43,9 +43,9 @@
                             <div class="form-group">
                                 <label for="songName">Song Category Name</label>
                                 <input type="text" class="form-control" id="songName" placeholder="Enter Album Name..." formControlName="name" maxlength="100" >
-                                <mat-error *ngIf="formSubmitted && f.name.errors">
+                                <!-- <mat-error *ngIf="formSubmitted && f.name.errors">
                                     <div *ngIf="f.name.errors.required || f.name.errors.nospace">*Please enter song name</div>
-                                </mat-error>
+                                </mat-error> -->
                                 <p class="exclamation_style"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Maximum 100 character</p>
                             </div>
                         </div>
