@@ -58,6 +58,13 @@ export class AlbumsCategoryListComponent implements OnInit {
     this.searchText         = "";
     this.getAlbumsCategoryList();
   }
+
+  onScroll(){
+    console.log("this is test")
+    this.currentPage = this.currentPage + 1;
+    this.getAlbumsCategoryList();
+
+  }
   
 
   getAlbumsCategoryList(){
@@ -115,7 +122,7 @@ export class AlbumsCategoryListComponent implements OnInit {
   openDeleteConfirmation(albumsCatId) {
       Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to delete this podcast ?',
+        text: 'You want to delete this album category ?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes',

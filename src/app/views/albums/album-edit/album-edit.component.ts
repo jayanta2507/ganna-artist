@@ -27,6 +27,10 @@ export class AlbumEditComponent implements OnInit {
  	albumDetails:any  = [];
  	imageStatus:number = 0;
 
+ 	currentPage:any   = 1;
+	searchText:any    = "";
+	albumsCategoryList:any = [];
+
 	constructor(private _formBuilder: FormBuilder,
 		private commonService: CommonService,
 		private helperService: HelperService,
@@ -41,6 +45,7 @@ export class AlbumEditComponent implements OnInit {
 	ngOnInit(): void {
 		this.getAlbumDetails();
 		this.createEditForm();
+		this.getAlbumsCategoryList();
 	}
 
 
@@ -48,6 +53,7 @@ export class AlbumEditComponent implements OnInit {
   	createEditForm() {
 	    this.editForm = this._formBuilder.group({
 	      name: ['', [Validators.required, noSpace]],
+	      album_category_id: ['', [Validators.required, noSpace]],
 	      file: ['']
 	    })
 	}
@@ -96,7 +102,8 @@ export class AlbumEditComponent implements OnInit {
 	          }
 
 	        this.editForm.patchValue({
-               name: this.albumDetails.name
+               name: this.albumDetails.name,
+               album_category_id: this.albumDetails.album_category_id
             });
 	          
 	        }
@@ -111,6 +118,39 @@ export class AlbumEditComponent implements OnInit {
 	}
 
 
+	getAlbumsCategoryList(){
+	       
+		this.isLoading = true;
+
+		this.subscriptions.push(
+			this.commonService.getAPICall({
+			url :'album-category-list',
+			data: {page: this.currentPage, search: this.searchText}
+			}).subscribe((result)=>{
+			this.isLoading = false;
+			if(result.status == 200) {
+
+				if(this.currentPage == 1) {
+					this.albumsCategoryList = [];
+				}
+
+				for(let item of result.data.album_category_list) {
+					this.albumsCategoryList.push(item);
+				}
+
+			}
+			else{
+				this.helperService.showError(result.msg);
+			}
+			},(err)=>{
+				this.isLoading = false;
+				this.helperService.showError(err.error.msg);
+			})
+		)
+	}
+
+
+
 	submitUpdateAlbum(){
   		
         this.formSubmitted = true;
@@ -122,6 +162,7 @@ export class AlbumEditComponent implements OnInit {
 	    } 
         
         formData.append('name', this.editForm.get('name').value);
+        formData.append('album_category_id', this.editForm.get('album_category_id').value);
 
 	    this.subscriptions.push(
 	      this.commonService.putAPICall({

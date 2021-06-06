@@ -75,43 +75,43 @@ export class AlbumAddComponent implements OnInit {
 		return this.addForm.controls;
 	}
 
- getAlbumsCategoryList(){
-       
-       this.isLoading = true;
-     
-      
-      	this.subscriptions.push(
-	        this.commonService.getAPICall({
-	          url :'album-category-list',
-	          data: {page: this.currentPage, search: this.searchText}
-	        }).subscribe((result)=>{
-	          this.isLoading = false;
-	          if(result.status == 200) {
+	 getAlbumsCategoryList(){
+	       
+	       this.isLoading = true;
+	     
+	      
+	      	this.subscriptions.push(
+		        this.commonService.getAPICall({
+		          url :'album-category-list',
+		          data: {page: this.currentPage, search: this.searchText}
+		        }).subscribe((result)=>{
+		          this.isLoading = false;
+		          if(result.status == 200) {
 
-	            //console.log(result)
+		            //console.log(result)
 
-	            if(this.currentPage == 1) {
-	              this.albumsCategoryList = [];
-	            }
+		            if(this.currentPage == 1) {
+		              this.albumsCategoryList = [];
+		            }
 
-	            for(let item of result.data.album_category_list) {
-	              this.albumsCategoryList.push(item);
-	            }
+		            for(let item of result.data.album_category_list) {
+		              this.albumsCategoryList.push(item);
+		            }
 
 
-	            console.log(this.albumsCategoryList)
-	            
+		            console.log(this.albumsCategoryList)
+		            
 
-	          }
-	          else{
-	            this.helperService.showError(result.msg);
-	          }
-	        },(err)=>{
-	          this.isLoading = false;
-	          this.helperService.showError(err.error.msg);
-	        })
-	      )
-  }
+		          }
+		          else{
+		            this.helperService.showError(result.msg);
+		          }
+		        },(err)=>{
+		          this.isLoading = false;
+		          this.helperService.showError(err.error.msg);
+		        })
+		      )
+	  }
 
 
 

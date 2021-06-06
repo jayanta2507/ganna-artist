@@ -51,6 +51,8 @@
                                 <td valign="middle">{{ album.name }}</td>
                                 <!--  <td valign="middle">{{ album?.album_category_id?.name  }}</td> -->
                                  <td valign="middle" *ngIf="album?.album_category_details!=''">{{album?.album_category_details?.name}}</td>
+
+                                 <td valign="middle" *ngIf="album?.album_category_details==''">--</td>
                             
  
                                 <td valign="middle">

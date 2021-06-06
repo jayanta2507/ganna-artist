@@ -32,61 +32,61 @@
             (scrolled)="onScroll()">
             <div class="col-12">
 
-            <div class="podcast_table">
-            <table class="table table-striped podcast_table_inner">
-                <thead>
-                    <tr>
-                         <th width="10%">Sl No.</th>
-                            <th width="20%">Name</th>
-                            <th width="20%">Cover Picture</th>
-                            <th width="30%">Details</th>
-                            <th width="20%">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let eachAlbumCategory of albumsCategoryList; let i = index;"   >
-                        <tr class="row_shadow">
-                            <td valign="middle">{{i+1}}</td>
-                           
-                            <td valign="middle">{{eachAlbumCategory.name}}</td>
-                             <td valign="middle"><img src="">
-
-
-                                    <img class="customeImage" width="40px" height="40px" *ngIf="eachAlbumCategory?.image_path" [src]="eachAlbumCategory?.image_path" alt="">
-
-                                    <span *ngIf="!eachAlbumCategory?.image_path">NA</span>
-
-                             
-                            <td valign="middle">{{eachAlbumCategory.details}}</td>
-                            <td valign="middle">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(eachAlbumCategory.id)">
-                                    <i class="fa fa-eye fa-lg"></i>
-                                    </a>
-                                </div>
-
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <a class="btn btn-light btn-sm" title="Edit" (click)="navigateToEdit(eachAlbumCategory.id)">
-                                    <i class="fa fa-edit fa-lg"></i>
-                                    </a>
-                                </div>
-
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <a class="btn btn-light btn-sm" title="Delete" (click)="deleteAlbumsCategory(eachAlbumCategory.id)">
-                                    <i class="fa fa-trash fa-lg"></i>
-                                    </a>
-                                </div>
-                            </td>
+                <div class="podcast_table">
+                <table class="table table-striped podcast_table_inner">
+                    <thead>
+                        <tr>
+                             <th width="10%">Sl No.</th>
+                                <th width="20%">Name</th>
+                                <th width="20%">Cover Picture</th>
+                                <th width="30%">Details</th>
+                                <th width="20%">Action</th>
                         </tr>
-                    </ng-container>
-                </tbody>
-            </table>
-            </div>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eachAlbumCategory of albumsCategoryList; let i = index;"   >
+                            <tr class="row_shadow">
+                                <td valign="middle">{{i+1}}</td>
+                               
+                                <td valign="middle">{{eachAlbumCategory.name}}</td>
+                                 <td valign="middle"><img src="">
 
-            <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
-                <img src="assets/images/no_image2.png" alt="noimage" style="width: 80%; max-width: 400px;" /> 
-            </h3>
-        </div>
+
+                                        <img class="customeImage" width="40px" height="40px" *ngIf="eachAlbumCategory?.image_path" [src]="eachAlbumCategory?.image_path" alt="">
+
+                                        <span *ngIf="!eachAlbumCategory?.image_path">NA</span>
+
+                                 
+                                <td valign="middle">{{eachAlbumCategory.details}}</td>
+                                <td valign="middle">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(eachAlbumCategory.id)">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Edit" (click)="navigateToEdit(eachAlbumCategory.id)">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Delete" (click)="openDeleteConfirmation(eachAlbumCategory.id)">
+                                        <i class="fa fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                </div>
+
+                <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
+                    <img src="assets/images/no_image2.png" alt="noimage" style="width: 80%; max-width: 400px;" /> 
+                </h3>
+            </div>
         </div>
     </div>
    <!--  LOADER -->
