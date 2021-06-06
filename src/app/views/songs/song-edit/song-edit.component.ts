@@ -6,7 +6,7 @@ import { CommonService } from '../../../core/services/Common/common.service';
 import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { noSpace } from '../../../shared/custom-validators/nospacesvalidator';
+import { noSpace } from '../../../shared/custom-validators/nospacesvalidator';  
 
 
 @Component({
@@ -46,6 +46,8 @@ export class SongEditComponent implements OnInit {
   	imageStatus:number = 0;
   	progress: number   = 0;
 
+	songsCategoryList:any = [];
+
 	constructor(
 		private _formBuilder: FormBuilder,
     	private commonService: CommonService,
@@ -62,6 +64,7 @@ export class SongEditComponent implements OnInit {
 		this.getSongDetails()
 		this.createAddForm();
 		this.fetchAlbumGenreList();
+		this.getSongsCategoryList()
 	}
 
 
@@ -77,6 +80,7 @@ export class SongEditComponent implements OnInit {
 			details: ['', [Validators.required, noSpace]],
 			is_paid: ['', [Validators.required, noSpace]],
 			album_id: ['0'],
+			song_category_id: ['0'],
 			genre_id: ['', [Validators.required, noSpace]],
 	    })
 	}
@@ -114,11 +118,12 @@ export class SongEditComponent implements OnInit {
 				}
 
 	          	this.addForm.patchValue({
-            	   	name      :   this.songDetails.name,
-            	   	details   :   this.songDetails.details,
-					is_paid   :   this.songDetails.is_paid,
-					album_id  :   this.songDetails.album_id,
-					genre_id  :   this.songDetails.genre_id,
+            	   	name             :   this.songDetails.name,
+            	   	details          :   this.songDetails.details,
+					is_paid          :   this.songDetails.is_paid,
+					album_id         :   this.songDetails.album_id,
+					song_category_id :   this.songDetails.song_category_id,
+					genre_id         :   this.songDetails.genre_id,
             	});
 
             	this.songCoverImagePath = this.songDetails.cover_picture;
@@ -269,6 +274,45 @@ export class SongEditComponent implements OnInit {
 	}
 
 
+	getSongsCategoryList(){
+       
+       this.isLoading = true;
+      
+      	this.subscriptions.push(
+	        this.commonService.getAPICall({
+	          url :'song-category-list',
+	          data: {page: this.currentPage, search: this.searchText}
+	        }).subscribe((result)=>{
+	          this.isLoading = false;
+	          if(result.status == 200) {
+
+	            //console.log(result)
+
+	            if(this.currentPage == 1) {
+	              this.songsCategoryList = [];
+	            }
+
+	            for(let item of result.data.album_category_list) {
+	              this.songsCategoryList.push(item);
+	            }
+
+
+	            console.log(this.songsCategoryList)
+	            
+
+	          }
+	          else{
+	            this.helperService.showError(result.msg);
+	          }
+	        },(err)=>{
+	          this.isLoading = false;
+	          this.helperService.showError(err.error.msg);
+	        })
+	      )
+  }
+
+
+
 	submitCreateSong(){
 		this.formSubmitted = true;
 		console.log(this.addForm);
@@ -282,6 +326,7 @@ export class SongEditComponent implements OnInit {
 			details : this.addForm.get('details').value,
 			is_paid : this.addForm.get('is_paid').value,
 			album_id : this.addForm.get('album_id').value,
+		    song_category_id : this.addForm.get('song_category_id').value,
 			genre_id : this.addForm.get('genre_id').value
 		}
 

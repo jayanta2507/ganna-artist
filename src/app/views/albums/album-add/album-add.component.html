@@ -40,6 +40,22 @@
                         </mat-error>
                         <p class="exclamation_style"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Maximum 100 character</p>
                     </div>
+
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="albumName">Album Category</label>
+                                <select class="form-control" name="albumName" formControlName="album_category_id">
+                                    <option value="">Select Song Category</option>
+                                    <option *ngFor="let albumCategory of  albumsCategoryList" value="{{albumCategory.id}}">
+                                        {{albumCategory.name}}
+                                    </option>
+                                </select>
+
+                                <mat-error *ngIf="formSubmitted && f.song_category_id.errors">
+                                    <div *ngIf="f.song_category_id.errors.required || f.song_category_id.errors.nospace">*Please select song category</div>
+                                </mat-error>
+                            </div>
+                        </div>
                     <button type="submit" class="btn btn btn-danger">Add</button>
                 </form>
             </div>

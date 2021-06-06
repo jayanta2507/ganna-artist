@@ -23,7 +23,7 @@ export class AlbumsCategoryListComponent implements OnInit {
   searchText:any                = "";
   totalAlbumscategory: number   = 0;
   searchStatus:number           = 0;
-    imageURL:any                 = environment.imageURL;
+  imageURL:any                 = environment.imageURL;
  
 
   constructor( private router:Router, 

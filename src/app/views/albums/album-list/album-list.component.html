@@ -36,6 +36,7 @@
                             <th>Sl No.</th>
                             <th>Cover Image</th>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,6 +49,10 @@
                                     <span *ngIf="!album.imgURL">NA</span>
                                 </td>
                                 <td valign="middle">{{ album.name }}</td>
+                                <!--  <td valign="middle">{{ album?.album_category_id?.name  }}</td> -->
+                                 <td valign="middle" *ngIf="album?.album_category_details!=''">{{album?.album_category_details?.name}}</td>
+                            
+ 
                                 <td valign="middle">
                                 <!--  <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                         <a class="btn btn-light btn-sm" title="Details" [popover]="'Details'"

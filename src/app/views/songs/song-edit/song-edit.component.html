@@ -73,6 +73,20 @@
                                 <div *ngIf="f.genre_id.errors.required || f.genre_id.errors.nospace">*Please select genre</div>
                             </mat-error>
                         </div>
+                    </div>  
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="albumName">Song Category</label>
+                            <select class="form-control" name="albumName" formControlName="song_category_id">
+                                <option value="0">Select Category</option>
+                                <option *ngFor="let songCategory of songsCategoryList" value="{{songCategory.id}}">
+                                    {{songCategory.name}}
+                                </option>
+                            </select>
+                            <mat-error *ngIf="formSubmitted && f.genre_id.errors">
+                                <div *ngIf="f.genre_id.errors.required || f.genre_id.errors.nospace">*Please select song category</div>
+                            </mat-error>
+                        </div>
                     </div>    
 
 
