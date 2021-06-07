@@ -58,6 +58,14 @@ export class SongsCategoryListComponent implements OnInit {
     this.searchText         = "";
     this.getSongsCategoryList();
   }
+
+    onScroll(){
+    console.log("this is test")
+    this.currentPage = this.currentPage + 1;
+    this.getSongsCategoryList();
+
+  }
+  
   
 
 
@@ -148,3 +156,4 @@ export class SongsCategoryListComponent implements OnInit {
       )
   }
 }
+ 
