@@ -58,7 +58,14 @@ export class PodcastCategoryListComponent implements OnInit {
     this.searchText         = "";
     this.getPodcastCategoryList();
   }
+
   
+   onScroll(){
+    console.log("this is test")
+    this.currentPage = this.currentPage + 1;
+    this.getPodcastCategoryList();
+
+  }
 
   getPodcastCategoryList(){
      if (this.searchStatus==0) {
