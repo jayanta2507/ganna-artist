@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { LoginComponent } from './views/login/login.component';
 import { OtpVerificationComponent } from './views/otp-verification/otp-verification.component';
 import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -34,12 +35,15 @@ export const routes: Routes = [
     path: 'reset-password/:hashValue',
     component: ResetPasswordComponent
   },
+
+
   {
     path: '',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
     },
+
     children: [
       {
         path: 'dashboard',
@@ -49,6 +53,11 @@ export const routes: Routes = [
       {
         path: 'upload-document',
         loadChildren: () => import('./views/upload-documents/upload-documents.module').then(m => m.UploadDocumentsModule),
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule),
         canActivate: [AuthGuardService]
       },
       {
