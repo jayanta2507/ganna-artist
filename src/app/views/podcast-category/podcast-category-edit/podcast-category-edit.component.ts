@@ -39,7 +39,7 @@ export class PodcastCategoryEditComponent implements OnInit {
 
 	podcastCatId:any     = "";
 
-	imgURL:string     = environment.imageURL;
+	imgURL:string     = environment.imageURL; 
 	imageStatus:number = 0;
 
 

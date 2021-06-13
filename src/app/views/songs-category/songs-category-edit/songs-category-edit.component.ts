@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { CommonService } from '../../../core/services/Common/common.service';
 import { HelperService } from '../../../core/services/Helper/helper.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute , Router } from '@angular/router';;
+import { ActivatedRoute , Router } from '@angular/router';
 import { noSpace } from '../../../shared/custom-validators/nospacesvalidator'; 
 
 @Component({

@@ -18,11 +18,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     CommonModule,
     ProfileRoutingModule,
     NgbCarouselModule,
-	NgbModule,
-	SharedModule,
-	ReactiveFormsModule,
-	FormsModule,
-	InfiniteScrollModule
+  	NgbModule,
+  	SharedModule,
+  	ReactiveFormsModule,
+  	FormsModule,
+  	InfiniteScrollModule
   ]
 })
 export class ProfileModule { }
