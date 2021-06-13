@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
 	profileCoverImage: any = 'assets/images/no_image.png'; 
 	profileCoverImageObj:any;
-	profileCoverImagePath: any = '';
+	
 
 	profileFile: any 	  = 'assets/images/no_image.png';
 	profileFileObj:any ;
@@ -45,6 +45,11 @@ export class ProfileComponent implements OnInit {
 	sortKey:any       = 2;
 	sortType:any      = "DESC";
 
+	profileImage:any  = '';
+	profileImageObj:any;
+	profileCoverImagePath: any = '';
+
+	countries:any     = [];
 
  
   constructor(private fb: FormBuilder,
@@ -56,6 +61,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   	this.createProfileForm();
 	this.getProfileDetails();
+	this.getCountries();
   }
 
   createProfileForm() {
@@ -73,6 +79,49 @@ export class ProfileComponent implements OnInit {
 	get f() {
 		return this.profileForm.controls;
 	}
+
+
+	profileImageUpload(event) {
+	    if (event.target.files && event.target.files[0]) {
+	      const mainFile: File = event.target.files[0];
+	      if (event.target.files[0].type.split('/')[1] != 'png' && event.target.files[0].type.split('/')[1] != 'jpg' && event.target.files[0].type.split('/')[1] != 'jpeg') {
+	        this.helperService.showError('Only JPG/JPEG/PNG files allowed');
+	        return;
+	      }	   
+	      const reader = new FileReader();
+	      reader.readAsDataURL(event.target.files[0]); // read file as data url
+	      reader.onload = (event) => { 
+	      	this.profileImage = event.target.result;
+ 
+	      	let formData: FormData = new FormData();
+
+		    this.isLoading = true
+		    formData.append('file', mainFile, mainFile.name);
+		    this.subscriptions.push(
+		      this.commonService.postAPICall({
+		        url: 'artist-details/upload-profile-picture',
+		        data: formData
+		      }).subscribe((result)=>{
+		        this.isLoading = false;
+		        if(result.status == 200) {
+		          this.profileImage = event.target.result;
+		          this.profileCoverImagePath = result.data.filePath;
+		        }
+		        else{
+		          this.helperService.showError(result.msg);
+		        }
+		      },(err)=>{
+		        this.isLoading = false;
+		        this.helperService.showError(err.error.msg);
+		      })
+		    )
+
+
+	      };
+	    }
+  	}
+
+
 	getProfileDetails(){
 
 	    this.subscriptions.push(
@@ -83,25 +132,25 @@ export class ProfileComponent implements OnInit {
 	        if(result.status == 200) {
 
 	        	this.profileDetails = result.data;
-	        	if (this.profileDetails.profile_image) {
+	        	if (this.profileDetails.artist_details.profile_image) {
 
 					this.imageStatus = 1;
-					this.imgURL = this.imgURL + this.profileDetails.profile_image;
+					this.profileImage = this.imgURL + this.profileDetails.artist_details.profile_image;
 
 				}else{
-					this.imgURL = "";
+					this.profileImage = "";
 				}
-				this.profileCoverImagePath = result.data.profile_image;
 
-
-
+				this.profileCoverImagePath = result.data.artist_details.profile_image;
 				
 	        	this.profileForm.patchValue({
-            	   	full_name   : this.profileDetails.full_name,
-            	   	email       : this.profileDetails.email,
-            	   	dob         : this.profileDetails.dob,
-            	   	country_id  : this.profileDetails.country_id,
+            	   	full_name   : this.profileDetails.artist_details.full_name,
+            	   	email       : this.profileDetails.artist_details.email,
+            	   	dob         : this.profileDetails.artist_details.dob,
+            	   	country_id  : this.profileDetails.artist_details.country_id,
+            	   	mobile_no   : this.profileDetails.artist_details.mobile_no
             	});
+
 	        }
 	        else{
 	          this.helperService.showError(result.msg);
@@ -111,6 +160,70 @@ export class ProfileComponent implements OnInit {
 	        this.helperService.showError(err.error.msg);
 	      })
 	    )
+  	}
+
+
+
+  	getCountries(){
+
+	    this.subscriptions.push(
+	      this.commonService.getAPICall({
+	        url: 'countries',
+	      }).subscribe((result)=>{
+	        this.isLoading = false;
+	        if(result.status == 200) {
+
+	        	 this.countries = result.data.countries;
+	        }
+	        else{
+	          this.helperService.showError(result.msg);
+	        }
+	      },(err)=>{
+	        this.isLoading = false;
+	        this.helperService.showError(err.error.msg);
+	      })
+	    )
+  	}
+
+
+  	updateProfile(){
+
+  		this.formSubmitted = true;
+
+  		if (this.profileForm.status=='INVALID') {
+  			return true;
+  		}
+  		this.isLoading = true;
+
+
+  		let postData = {
+			full_name : this.f.full_name.value.toString(),
+			mobile_no : this.f.mobile_no.value.toString(),
+			dob : moment(this.profileForm.get('dob').value).format('YYYY-MM-DD'),
+			country_id : this.f.country_id.value.toString(),
+			profile_image : this.profileCoverImagePath
+  		}
+
+        this.subscriptions.push(
+	      this.commonService.putAPICallUpdate({
+	        url: 'update-artist-profile',
+	        data: postData,
+	      }).subscribe((result)=>{
+	        this.isLoading = false;
+	        if(result.status == 200) {
+
+	        	this.helperService.showSuccess(result.msg);
+	        	this.getProfileDetails();
+
+	        }
+	        else{
+	          this.helperService.showError(result.msg);
+	        }
+	      },(err)=>{
+	        this.isLoading = false;
+	        this.helperService.showError(err.error.msg);
+	      })
+	    )  		 
   	}
 
 }
