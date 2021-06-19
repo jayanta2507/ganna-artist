@@ -53,5 +53,11 @@ export let navItems: INavData[] = [];
       icon: 'fa fa-podcast',
       //attributes: { disabled: isActive == 1 ? false : true },
     },
+    {
+      name: 'Artist',
+      url: '/artist',
+      icon: 'fa fa-file-text-o',
+      //attributes: { disabled: isActive == 1 ? false : true },
+    }
 
   ];
