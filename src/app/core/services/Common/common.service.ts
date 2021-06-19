@@ -54,7 +54,7 @@ export class CommonService {
       responseType: 'json'
     });
 
-    return this.http.request(req);
+    return this.http.request(req); 
   }
 
   // Get API Call
