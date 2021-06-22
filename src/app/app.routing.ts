@@ -21,7 +21,7 @@ export const routes: Routes = [
     component: LoginComponent,
     data: {
       title: 'Login Page'
-    }
+    },
   },
   {
     path: 'forgot-password',
@@ -94,6 +94,11 @@ export const routes: Routes = [
       {
         path: 'artist',
         loadChildren: () => import('./views/artist/artist.module').then(m => m.ArtistModule),
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'playlist',
+        loadChildren: () => import('./views/playlist/playlist.module').then(m => m.PlaylistModule),
         canActivate: [AuthGuardService]
       }
      
