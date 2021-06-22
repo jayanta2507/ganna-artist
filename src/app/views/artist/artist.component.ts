@@ -20,14 +20,16 @@ import { Subscription } from 'rxjs';
 })
 export class ArtistComponent implements OnInit {
 
-subscriptions: Subscription[] = [];
-isLoading: boolean = false;
-currentPage: any = 1;
-searchText: any = "";
-totalArtistList: number = 0;
-searchStatus: number = 0;
-imageURL: any = environment.imageURL;
-artistList:any = [];
+  subscriptions: Subscription[] = [];
+  isLoading: boolean = false;
+  currentPage: any = 1;
+  searchText: any = "";
+  sortKey:any = "";
+  sortType:any = "";
+  totalArtistList: number = 0;
+  searchStatus: number = 0;
+  imageURL: any = environment.imageURL;
+  artistList:any = [];
 
   constructor(private router:Router, private commonService: CommonService, private helperService: HelperService) {
 
@@ -49,7 +51,7 @@ getArtistList(){
       this.subscriptions.push(
         this.commonService.getAdminAPICall({
           url :'artist-list',
-          data: {page: this.currentPage, search: this.searchText}
+          data: { page: this.currentPage, search: this.searchText, sortKey: this.sortKey, sortType: this.sortType}
         }).subscribe((result)=>{
           this.isLoading = false;
           if(result.status == 200) {
