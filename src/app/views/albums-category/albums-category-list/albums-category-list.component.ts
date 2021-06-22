@@ -85,6 +85,7 @@ export class AlbumsCategoryListComponent implements OnInit {
 
             if(this.currentPage == 1) {
               this.albumsCategoryList = [];
+              //console.log(this.albumsCategoryList);
             }
 
             for(let item of result.data.album_category_list) {

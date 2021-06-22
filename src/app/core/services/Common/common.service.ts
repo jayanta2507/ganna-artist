@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class CommonService {
   apiURL: string = environment.apiURL;
+  adminURL: string = environment.adminURL;
 
   constructor(
     private http: HttpClient,
@@ -139,4 +140,30 @@ export class CommonService {
         catchError(this.helperService.handleError('error ', []))
     );
   }
+
+ getAdminAPICall(requestData: any) {
+    let headers: HttpHeaders = new HttpHeaders();
+    if (requestData.contentType) {
+      headers = headers.append('Accept', requestData.contentType);
+    } else {
+      headers = headers.append('Accept', 'application/json');
+    }
+    if(localStorage.getItem('artist-access-token')) {
+      headers = headers.append('Authorization', `Bearer ${localStorage.getItem('artist-access-token')}`)
+    }
+    let params = new HttpParams();
+    for (const key in requestData.data) {
+      if (requestData.data.hasOwnProperty(key)) {
+        params = params.append(key, requestData.data[key]);
+      }
+    }
+
+    return this.http.get<any>(this.adminURL + requestData.url, { headers, params })
+      .pipe(
+        catchError(this.helperService.handleError('error ', []))
+    );
+  }
+
+
 }
+

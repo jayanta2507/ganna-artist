@@ -27,7 +27,7 @@ searchText: any = "";
 totalArtistList: number = 0;
 searchStatus: number = 0;
 imageURL: any = environment.imageURL;
-artistList: any = [];
+artistList:any = [];
 
   constructor(private router:Router, private commonService: CommonService, private helperService: HelperService) {
 
@@ -41,14 +41,14 @@ artistList: any = [];
 
 getArtistList(){
 
-if (this.searchStatus==0) {
+ if (this.searchStatus==0) {
         this.isLoading = true;
       }
       
 
       this.subscriptions.push(
-        this.commonService.getAPICall({
-          url :'artist-details',
+        this.commonService.getAdminAPICall({
+          url :'artist-list',
           data: {page: this.currentPage, search: this.searchText}
         }).subscribe((result)=>{
           this.isLoading = false;
@@ -60,15 +60,15 @@ if (this.searchStatus==0) {
               this.artistList = [];
             }
 
-            for(let item of result.data.artist_details) {
+            for(let item of result.data.artist_list.profile_image) {
 
 
-              item.image_path = this.imageURL + item.cover_image;
+              item.image_path = this.imageURL + item.profile_image;
               this.artistList.push(item);
+
             }
             
-            this.totalArtistList = result.data.totalCount;
-
+            this.totalArtistList = result.data;
             this.searchStatus = 0;
           }
           else{
@@ -79,10 +79,9 @@ if (this.searchStatus==0) {
           this.helperService.showError(err.error.msg);
         })
       )
-  }
-
 }
 
+}
 
 
 

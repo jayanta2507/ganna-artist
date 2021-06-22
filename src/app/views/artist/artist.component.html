@@ -5,7 +5,7 @@
             <div class="col-md-4">
                 <div class="input-group">
 
-                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by artist name and email" (input)="searchAlbumCategory()" [(ngModel)]="searchText">
+                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by artist name and email" (input)="searchArtist()" [(ngModel)]="searchText">
 
                     <div class="input-group-append search_button">
                         <button  class="btn btn-danger search_button_style" type="button">
@@ -46,35 +46,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let eachAlbumCategory of albumsCategoryList; let i = index;"   >
+                        <ng-container *ngFor="let eachArtist of artistList; let i = index;" >
                             <tr class="row_shadow">
                                 <td valign="middle">{{i+1}}</td>
                                
-                                <td valign="middle">{{eachAlbumCategory.name}}</td>
                                  <td valign="middle"><img src="">
+                                        <img class="customeImage" width="40px" height="40px" *ngIf="eachArtist?.image_path" [src]="eachArtist?.image_path" alt=""></td>
 
+                                        <span *ngIf="!eachArtist?.image_path">NA</span>
 
-                                        <img class="customeImage" width="40px" height="40px" *ngIf="eachAlbumCategory?.image_path" [src]="eachAlbumCategory?.image_path" alt="">
+                                            <td valign="middle">{{eachArtist.name}}</td> 
+                                            <td valign="middle">{{eachArtist.email}}</td>
+                                            <td valign="middle">{{eachArtist.mobile}}</td>
+                                            <td valign="middle">{{eachArtist.verify}}</td>
 
-                                        <span *ngIf="!eachAlbumCategory?.image_path">NA</span>
-
-                                 
-                                <td valign="middle">{{eachAlbumCategory.details}}</td>
-                                <td valign="middle">
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                        <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(eachAlbumCategory.id)">
-                                        <i class="fa fa-eye fa-lg"></i>
-                                        </a>
-                                    </div>
-
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                        <a class="btn btn-light btn-sm" title="Edit" (click)="navigateToEdit(eachAlbumCategory.id)">
-                                        <i class="fa fa-edit fa-lg"></i>
-                                        </a>
-                                    </div>
-
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                        <a class="btn btn-light btn-sm" title="Delete" (click)="openDeleteConfirmation(eachAlbumCategory.id)">
+                                   <td> 
+                                   <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Delete" (click)="openDeleteConfirmation(eachArtist.id)">
                                         <i class="fa fa-trash fa-lg"></i>
                                         </a>
                                     </div>
