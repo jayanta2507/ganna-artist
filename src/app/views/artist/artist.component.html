@@ -55,18 +55,25 @@
 
                                         <span *ngIf="!eachArtist?.image_path">NA</span>
 
-                                            <td valign="middle">{{eachArtist.name}}</td> 
+                                            <td valign="middle">{{eachArtist.full_name}}</td> 
                                             <td valign="middle">{{eachArtist.email}}</td>
-                                            <td valign="middle">{{eachArtist.mobile}}</td>
+                                            <td valign="middle">{{eachArtist.mobile_no}}</td>
                                             <td valign="middle">{{eachArtist.verify}}</td>
 
-                                   <td> 
+                                   <td>
+                                     
+                                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(eachArtist.id)">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                        </a>
+                                    </div>
                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                         <a class="btn btn-light btn-sm" title="Delete" (click)="openDeleteConfirmation(eachArtist.id)">
                                         <i class="fa fa-trash fa-lg"></i>
                                         </a>
                                     </div>
                                 </td>
+                               
                             </tr>
                         </ng-container>
                     </tbody>

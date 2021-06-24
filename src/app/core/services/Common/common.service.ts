@@ -165,5 +165,67 @@ export class CommonService {
   }
 
 
+
+  postAdminAPICall(requestData: any) {
+
+    let headers: HttpHeaders = new HttpHeaders();
+    if (requestData.contentType) {
+      headers = headers.append('Accept', requestData.contentType);
+    } else {
+      headers = headers.append('Accept', 'application/json');
+    }
+    if(localStorage.getItem('artist-access-token')) {
+      headers = headers.append('Authorization', `Bearer ${localStorage.getItem('artist-access-token')}`)
+    }
+
+    return this.http.post<any>(this.adminURL + requestData.url, requestData.data, { headers })
+      .pipe(
+        catchError(this.helperService.handleError('error ', []))
+    );
+      
+  }
+
+
+  putAdminAPICall(requestData: any) {
+    let headers: HttpHeaders = new HttpHeaders();
+    if (requestData.contentType) {
+      headers = headers.append('Accept', requestData.contentType);
+    } else {
+      headers = headers.append('Accept', 'application/json');
+    }
+    if(localStorage.getItem('artist-access-token')) {
+      headers = headers.append('Authorization', `Bearer ${localStorage.getItem('artist-access-token')}`)
+    }
+    let params = new HttpParams();
+    for (const key in requestData.data) {
+      if (requestData.data.hasOwnProperty(key)) {
+        params = params.append(key, requestData.data[key]);
+      }
+    }
+    return this.http.put<any>(this.adminURL + requestData.url, requestData.data, { headers, params })
+      .pipe(
+        catchError(this.helperService.handleError('error ', []))
+    );
+  }
+
+
+
+  deleteAdminAPICall(requestData: any) {
+    let headers: HttpHeaders = new HttpHeaders();
+    if (requestData.contentType) {
+      headers = headers.append('Accept', requestData.contentType);
+    } else {
+      headers = headers.append('Accept', 'application/json');
+    }
+    if(localStorage.getItem('artist-access-token')) {
+      headers = headers.append('Authorization', `Bearer ${localStorage.getItem('artist-access-token')}`)
+    }
+
+    return this.http.delete<any>(this.adminURL + requestData.url, { headers })
+      .pipe(
+        catchError(this.helperService.handleError('error ', []))
+    );
+  }
+
 }
 

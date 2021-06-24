@@ -1,0 +1,354 @@
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+    	<div class="row">
+            <div class="col-md-6">
+                <span><h3>Basic Details</h3></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <img class="customeImage" width="90px" height="90px"  style="border-radius: 60%" *ngIf="imgURL" [src]="imgURL" alt="">
+                    <span *ngIf="imgURL==''">NA</span>
+                </div>
+            </div>
+        </div>
+
+     <!--    <div class="row mt-4" *ngIf="albumCatDetails?.length>0">
+
+            <div class="col-md-6">
+                <audio controls>
+				  	<source src="{{albumCatDetails.song_url}}" type="audio/mpeg">
+				</audio>
+            
+            </div>
+        </div> -->
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                   <strong>Name:</strong> {{artistDetails.artist_details.full_name}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Mobiles:</strong> {{artistDetails.artist_details.mobile_no}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+
+         <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Email:</strong> {{artistDetails.artist_details.email}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+          <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Date Of Birth:</strong> {{artistDetails.artist_details.dob}}
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <hr>
+        
+        <br>
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
+ <!-- /////////////////////////////////// Artist Details /////////////////////////////////// -->
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+    	<div class="row">
+            <div class="col-md-6">
+                <span><h3>Address</h3></span>
+            </div>
+        </div>
+       
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                   <strong>Building No: </strong> {{artistDetails.artist_details.artist_account_details.building_no}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Street:</strong> {{artistDetails.artist_details.artist_account_details.street}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+
+         <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>City:</strong> {{artistDetails.artist_details.artist_account_details.city}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+          <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>State/Province:</strong>{{ artistDetails.artist_details.artist_account_details.state}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+
+         <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Zip/Postal Code:</strong>{{ artistDetails.artist_details.artist_account_details.zip}}
+                </div>
+            </div>
+        </div>
+
+
+        
+   
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
+
+<!-- ////////////////////////////////////////////Artist Account Details//////////////////////////////////////   -->
+
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+    	<div class="row">
+            <div class="col-md-6">
+                <span><h3>Artist Account Details</h3></span>
+            </div>
+        </div>
+       
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                   <strong>Account Holder Name: </strong> {{artistDetails.artist_details.artist_account_details.account_holder_name}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Account number:</strong>{{artistDetails.artist_details.artist_account_details.account_number}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+
+         <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Bank Country:</strong> {{artistDetails.artist_details.country.name}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+          <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Bank City</strong>{{ artistDetails.artist_details.artist_account_details.bank_city}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+
+         <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Bank Zip:</strong>{{ artistDetails.artist_details.artist_account_details.bank_zip}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Routing No/Sort Code:</strong>{{ artistDetails.artist_details.artist_account_details.routing_no}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+       <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Swift Code:</strong>NA<!-- {{ artistDetails.artist_details.artist_account_details.zip}} -->
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>Currency:</strong>{{ artistDetails.artist_details.artist_account_details.currency}}
+                </div>
+            </div>
+        </div>
+
+
+
+        
+   
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
+
+<!-- //////////////////////////// GOVT IDENTITY ////////////////////////////// -->
+
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+    	<div class="row">
+            <div class="col-md-6">
+                <span><h3>GOVT IDENTITY</h3></span>
+            </div>
+        </div>
+       
+        <br>
+        <hr>
+         <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                	<strong>Govt Identity(front):</strong>
+                    <img class="customeImage" width="90px" height="90px"  style="border-radius: 60%"  [src]="imgURL" alt="">
+                    
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+         <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                	<strong>Govt Identity(Back):</strong>
+                    <img class="customeImage" width="90px" height="90px"  style="border-radius: 60%"  [src]="imgURL" alt="">
+                    
+                </div>
+            </div>
+
+      
+
+        
+   
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
+</div>
+
+
+<!-- ///////////////////////////////////////SAMPLE SONG ///////////////////////////////////////////-->
+
+
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+    	<div class="row">
+            <div class="col-md-6">
+                <span><h3>Song Sample</h3></span>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                   <strong>Song Name:</strong> {{artistDetails.artist_details.artist_account_details.sample_song_name}}
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>SONG DETAILS:</strong> {{artistDetails.artist_details.artist_account_details.sample_song_path}}
+                </div>
+            </div>
+        </div>
+         <br>
+        <hr>
+        <div class="row" *ngIf="artistDetails.artist_details.artist_account_details.sample_song_path.length>0">
+
+            <div class="col-md-12">
+                <div class="input-group">
+                    <strong>SONG DETAILS:</strong> <audio controls>
+                    <source src="{{artistDetails.artist_details.artist_account_details.song_url}}" type="audio/mpeg">
+                </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
