@@ -1,0 +1,96 @@
+ <div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+
+                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by artist name and email" (input)="searchArtist()" [(ngModel)]="searchText">
+
+                    <div class="input-group-append search_button">
+                        <button  class="btn btn-danger search_button_style" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button class="btn btn-danger search_button_style" type="button" *ngIf="searchText!=''">
+                          <i class="fa fa-times" (click)="clearSearch()"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div style="float: right;">
+                    <button class="btn btn-danger" routerLink="add"><i _ngcontent-jlk-c84="" class="fa fa-plus fa-md"></i> Add album category</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" 
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()">
+            <div class="col-12">
+
+                <div class="podcast_table">
+                <table class="table table-striped podcast_table_inner">
+                    <thead>
+                        <tr>
+                                <th width="10%">Sl No.</th>
+                                <th width="10%">Profile Picture</th>
+                                <th width="15%">Name</th>
+                                <th width="20%">Email</th>
+                                <th width="10%">Mobile Number</th>
+                                <th width="10%">Verify</th>
+                                <th width="15%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let eachArtist of artistList; let i = index;" >
+                            <tr class="row_shadow">
+                                <td valign="middle">{{i+1}}</td>
+                               
+                                 <td valign="middle"><img src="">
+                                        <img class="customeImage" width="40px" height="40px" *ngIf="eachArtist?.image_path" [src]="eachArtist?.image_path" alt=""></td>
+
+                                        <span *ngIf="!eachArtist?.image_path">NA</span>
+
+                                            <td valign="middle">{{eachArtist.full_name}}</td> 
+                                            <td valign="middle">{{eachArtist.email}}</td>
+                                            <td valign="middle">{{eachArtist.mobile_no}}</td>
+                                            <td valign="middle">{{eachArtist.verify}}</td>
+
+                                   <td>
+                                     
+                                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Details" (click)="navigateToDetails(eachArtist.id)">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                        </a>
+                                    </div>
+                                   <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Delete" (click)="openDeleteConfirmation(eachArtist.id)">
+                                        <i class="fa fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                </div>
+
+                <h3 style="text-align: center; width: 100%;" *ngIf="podcastList?.length === 0">
+                    <img src="assets/images/no_image2.png" alt="noimage" style="width: 80%; max-width: 400px;" /> 
+                </h3>
+            </div>
+        </div>
+    </div>
+   <!--  LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+</div>
+</div>
+
+
