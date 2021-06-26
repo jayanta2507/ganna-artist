@@ -102,6 +102,11 @@ export const routes: Routes = [
         canActivate: [AuthGuardService]
       },
       {
+        path: 'genre',
+        loadChildren: () => import('./views/genre/genre.module').then(m => m.GenreModule),
+        canActivate: [AuthGuardService]
+      },
+      {
         path: 'playlist',
         loadChildren: () => import('./views/playlist/playlist.module').then(m => m.PlaylistModule),
         canActivate: [AuthGuardService]

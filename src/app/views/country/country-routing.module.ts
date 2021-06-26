@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CountryListComponent } from './country-list/country-list.component';
 import { CountryAddComponent } from './country-add/country-add.component';
+
 import { CountryStatusChangeComponent } from './country-status-change/country-status-change.component';
+
 const routes: Routes = [{
 
 path: '',
@@ -26,13 +28,12 @@ children: [
         },
       },
       {
-        path: 'country-status-change/:id',
-        component: CountryStatusChangeComponent,
+        path: 'status-change',
+        component: CountryStatusChangeComponent ,
         data: {
           title: 'Country Status Change'
         },
-      },
-
+      }
 ]
 
 }];

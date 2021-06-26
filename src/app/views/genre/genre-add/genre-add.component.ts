@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../core/services/Common/common.service';
 import { HelperService } from '../../../core/services/Helper/helper.service';
@@ -13,13 +13,13 @@ import { AuthGuardService } from '../../../core/guards/auth-guard.service';
 import firebase from 'firebase/app';
 import { Subscription } from 'rxjs';
 
-
 @Component({
-  selector: 'app-country-add',
-  templateUrl: './country-add.component.html',
-  styleUrls: ['./country-add.component.scss']
+  selector: 'app-genre-add',
+  templateUrl: './genre-add.component.html',
+  styleUrls: ['./genre-add.component.scss']
 })
-export class CountryAddComponent implements OnInit {
+export class GenreAddComponent implements OnInit {
+
 
 	addForm: FormGroup;
 	formSubmitted: boolean = false;
@@ -33,9 +33,8 @@ export class CountryAddComponent implements OnInit {
 	sortType:any      = "DESC";
 
 
-	countries:any     = [];
+	genre:any     = [];
 
- 
   constructor(private fb: FormBuilder,
     private helperService: HelperService,
     private commonService: CommonService,
@@ -43,16 +42,15 @@ export class CountryAddComponent implements OnInit {
     public afAuth: AngularFireAuth,) { }
 
   ngOnInit(): void {
-  	this.createAddForm();
-	
+  	 this.createAddForm();
   }
 
-  createAddForm() {
+
+   createAddForm() {
 	    this.addForm = this.fb.group({
 			
 			name: ['', [Validators.required, noSpace]],
-			country_code:['', [Validators.required, noSpace]],
-			telephone_code:['', [Validators.required, noSpace]],
+			
 	    })
 	}
 
@@ -63,8 +61,7 @@ export class CountryAddComponent implements OnInit {
 	}
 
 
-
-  	submitCountry(){
+	submitGenre(){
   		this.formSubmitted = true;
   		console.log(this.addForm);
 		
@@ -72,20 +69,18 @@ export class CountryAddComponent implements OnInit {
 
 		let postData = {
 			name : this.addForm.get('name').value,
-			country_code: this.addForm.get('country_code').value,
-			telephone_code: this.addForm.get('telephone_code').value,
 			
 		}
 
 	    this.subscriptions.push(
 	      this.commonService.postAdminAPICall({
-	        url: 'country-add',
+	        url: 'genre-add',
 	        data: postData
 	      }).subscribe((result)=>{
 	        this.isLoading = false;
 	        if(result.status == 200) {
 	          this.helperService.showSuccess(result.msg);
-	          this.router.navigate(['/country'])
+	          this.router.navigate(['/genre'])
 	        }
 	        else{
 	          this.helperService.showError(result.msg);
@@ -98,5 +93,4 @@ export class CountryAddComponent implements OnInit {
   	}
 
 
-  	
 }

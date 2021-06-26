@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,19 +12,19 @@ import Swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-country-list',
-  templateUrl: './country-list.component.html',
-  styleUrls: ['./country-list.component.scss']
+  selector: 'app-genre-list',
+  templateUrl: './genre-list.component.html',
+  styleUrls: ['./genre-list.component.scss']
 })
-export class CountryListComponent implements OnInit {
+export class GenreListComponent implements OnInit {
 
 
   subscriptions: Subscription[] = [];
-  countryList:any        = [];
+  genreList:any        = [];
   isLoading: boolean            = false;
   currentPage:any               = 1;
   searchText:any                = "";
-  totalCountryList: number   = 0;
+  totalGenreList: number   = 0;
   searchStatus:number           = 0;
   imageURL:any                 = environment.imageURL;
   sortKey: any = "";
@@ -38,45 +37,36 @@ export class CountryListComponent implements OnInit {
               private helperService: HelperService) { }
 
   ngOnInit(): void {
-        this.getCountryList();
+        this.getGenreList();
   }
 
 
 
-  searchCountry(){
+  searchGenre(){
  
     if (this.searchText.length>3 && this.searchText!='') {
       this.currentPage = 1;
-      this.countryList = [];
-      this.getCountryList();
+      this.genreList = [];
+      this.getGenreList();
     }
 
     if (this.searchText.length==0) {
       this.currentPage = 1;
-      this.countryList = [];
+      this.genreList = [];
       this.searchText         = "";
-      this.getCountryList();
+      this.getGenreList();
     }
 
   }
 
   clearSearch(){
     this.currentPage = 1;
-    this.countryList = [];
+    this.genreList = [];
     this.searchText         = "";
-    this.getCountryList();
+    this.getGenreList();
   }
 
-
-  onScroll(){
-    console.log("this is test")
-    this.currentPage = this.currentPage + 1;
-    this.getCountryList();
-
-  }
-  
-
-getCountryList(){
+getGenreList(){
 
  if (this.searchStatus==0) {
         this.isLoading = true;
@@ -85,7 +75,7 @@ getCountryList(){
 
       this.subscriptions.push(
         this.commonService.getAdminAPICall({
-          url :'country-list',
+          url :'genre-list',
           data: { page: this.currentPage, search: this.searchText, sortKey: this.sortKey, sortType: this.sortType}
         }).subscribe((result)=>{
           this.isLoading = false;
@@ -94,18 +84,18 @@ getCountryList(){
              console.log(result.data.country_list)
 
             if(this.currentPage == 1) {
-              this.countryList = [];
-              console.log(this.countryList);
+              this.genreList = [];
+              console.log(this.genreList);
 
             }
    
-           for(let item of result.data.country_list) {
+           for(let item of result.data.genre_list) {
 
 
-           this.countryList.push(item);
+           this.genreList.push(item);
             }
             
-            this.totalCountryList = result.data.totalCount;
+            this.totalGenreList = result.data.totalCount;
             this.searchStatus = 0;
           }
           else{
@@ -117,6 +107,47 @@ getCountryList(){
         })
       )
 }
+
+
+openDeleteConfirmation(genreId) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to delete this podcast ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No, keep it'
+      }).then((result) => {
+        if (result.value) {
+          this.deleteGenre(genreId)
+        } 
+      })
+  } 
+ 
+
+  deleteGenre(genreId){
+      this.isLoading = true;
+      this.subscriptions.push(
+        this.commonService.deleteAdminAPICall({
+          url :'delete-genre/' + genreId,
+        }).subscribe((result)=>{
+          this.isLoading = false;
+          if(result.status == 200) {
+            this.helperService.showSuccess(result.msg);
+            this.currentPage = 1;
+            this.genreList = [];
+            this.getGenreList();
+          }
+          else{
+            this.helperService.showError(result.msg);
+          }
+        },(err)=>{
+          this.isLoading = false;
+          this.helperService.showError(err.error.msg);
+        })
+      )
+  }
+
 
 
 }

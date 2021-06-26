@@ -66,6 +66,12 @@ export let navItems: INavData[] = [];
       //attributes: { disabled: isActive == 1 ? false : true },
     } ,
     {
+      name: 'Genre',
+      url: '/genre',
+      icon: 'fa fa-file-text-o',
+      //attributes: { disabled: isActive == 1 ? false : true },
+    } ,
+    {
       name: 'Playlist',
       url: '/playlist',
       icon: 'fa fa-podcast',

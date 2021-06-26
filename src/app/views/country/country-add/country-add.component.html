@@ -1,1 +1,76 @@
-<p>country-add works!</p>
+<div class="body_inner">
+<div class="animated fadeIn">
+    <div class="country_list_main_area">
+        <div class="row">
+            <div class="col-md-6">
+                <span><h3>Add Albums Category</h3></span>
+            </div>
+        </div>
+        <div class="row">
+             
+            <div class="col-md-10"> 
+                <form [formGroup]="addForm" autocomplete="off" (ngSubmit)="submitCountry()">
+                    <div class="row">
+                          
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="countryName">Country Name</label>
+                        <input type="text" class="form-control" id="countryName" placeholder="Enter Country Name" formControlName="name" maxlength="100">
+                        <mat-error *ngIf="formSubmitted && f.name.errors">
+                            <div *ngIf="f.name.errors.required || f.name.errors.nospace">*Please enter albums category name</div>
+                        </mat-error>
+                        <p _ngcontent-bkh-c406="" class="exclamation_style"><i _ngcontent-bkh-c406="" aria-hidden="true" class="fa fa-exclamation-circle"></i>Add Country Name</p>
+                    </div>
+                    </div>
+                     
+  
+                    
+
+                </div>
+                 <div class="row">
+                          
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="countryName">Country Code</label>
+                        <input type="text" class="form-control" id="countryCode" placeholder="Enter Country Code" formControlName="country_code" maxlength="100">
+                        <mat-error *ngIf="formSubmitted && f.country_code.errors">
+                            <div *ngIf="f.country_code.errors.required || f.country_code.errors.nospace">*Please enter albums category country_code</div>
+                        </mat-error>
+                        <p _ngcontent-bkh-c406="" class="exclamation_style"><i _ngcontent-bkh-c406="" aria-hidden="true" class="fa fa-exclamation-circle"></i> Put the Country Code</p>
+                    </div>
+                    </div>
+                     
+  
+                   
+
+                </div>
+                 <div class="row">
+                          
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="countryName">Country Telephone</label>
+                        <input type="text" class="form-control" id="countryTelephone" placeholder="Enter Country Name" formControlName="telephone_code" maxlength="100">
+                        <mat-error *ngIf="formSubmitted && f.telephone_code.errors">
+                            <div *ngIf="f.telephone_code.errors.required || f.telephone_code.errors.nospace">*Please enter albums category telephone_code</div>
+                        </mat-error>
+                        <p _ngcontent-bkh-c406="" class="exclamation_style"><i _ngcontent-bkh-c406="" aria-hidden="true" class="fa fa-exclamation-circle"></i>Add the Country Telephone Code</p>
+                    </div>
+                    </div>
+                     
+  
+                    <div class="col-12">
+                    <button type="submit" class="btn btn btn-danger">Add</button>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+    <!-- LOADER -->
+    <div *ngIf="isLoading" class="loder">
+        <img src="assets/images/loader.gif" alt="loader" />  
+    </div>
+    
+</div>
+</div>

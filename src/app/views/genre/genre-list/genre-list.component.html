@@ -5,7 +5,7 @@
             <div class="col-md-4">
                 <div class="input-group">
 
-                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by artist name and email" (input)=" searchCountry()" [(ngModel)]="searchText">
+                    <input type="text" class="form-control search_field" name="searchText" placeholder="Search by genre name and email" (input)="searchGenre()" [(ngModel)]="searchText">
 
                     <div class="input-group-append search_button">
                         <button  class="btn btn-danger search_button_style" type="button">
@@ -20,7 +20,7 @@
 
             <div class="col-md-8">
                 <div style="float: right;">
-                    <button class="btn btn-danger" routerLink="add"><i _ngcontent-jlk-c84="" class="fa fa-plus fa-md"></i> Add Country</button>
+                    <button class="btn btn-danger" routerLink="add"><i _ngcontent-jlk-c84="" class="fa fa-plus fa-md"></i> Add Genre</button>
                 </div>
             </div>
         </div>
@@ -36,21 +36,24 @@
                 <table class="table table-striped podcast_table_inner">
                     <thead>
                         <tr>
-                                <th width="10%">Sl No.</th>
-                                <th width="30%">Country</th>
-                                <th width="20%">Country Code</th>
-                                <th width="20%">Country Telephone</th>
-                                <th width="20%">Country Status Change</th>
+                                <th width="30%">Sl No.</th>
+                                <th width="40%">Genre</th>
+                                <th width="30%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let eachCountry of countryList; let i = index;" >
+                        <ng-container *ngFor="let eachGenre of genreList; let i = index;" >
                             <tr class="row_shadow">
                                 <td valign="middle">{{i+1}}</td>
-                               <td valign="middle">{{eachCountry.name}}</td> 
-                               <td valign="middle">{{eachCountry.country_code}}</td>
-                               <td valign="middle">{{eachCountry.telephone_code}}</td>
-                               <td valign="middle">{{eachCountry.is_active}}</td> 
+                               <td valign="middle">{{eachGenre.name}}</td> 
+                                   <td>
+                                   <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <a class="btn btn-light btn-sm" title="Delete" (click)="openDeleteConfirmation(eachGenre.id)">
+                                        <i class="fa fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                               
                             </tr>
                         </ng-container>
                     </tbody>
@@ -69,5 +72,3 @@
     </div>
 </div>
 </div>
-
-

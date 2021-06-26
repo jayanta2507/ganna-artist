@@ -1,27 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CountryRoutingModule } from './country-routing.module';
-import { CountryListComponent } from './country-list/country-list.component';
-import { CountryAddComponent } from './country-add/country-add.component';
-
+import { GenreRoutingModule } from './genre-routing.module';
+import { GenreListComponent } from './genre-list/genre-list.component';
+import { GenreAddComponent } from './genre-add/genre-add.component';
 
 import { NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CountryStatusChangeComponent } from './country-status-change/country-status-change.component';
+
 
 
 @NgModule({
   declarations: [
-    CountryListComponent,
-    CountryAddComponent,
-    CountryStatusChangeComponent
+    GenreListComponent,
+    GenreAddComponent
+    
   ],
   imports: [
     CommonModule,
-    CountryRoutingModule,
+    GenreRoutingModule,
     NgbCarouselModule,
     NgbCarouselModule,
     NgbModule,
@@ -31,4 +30,4 @@ import { CountryStatusChangeComponent } from './country-status-change/country-st
     InfiniteScrollModule
   ]
 })
-export class CountryModule { }
+export class GenreModule { }
